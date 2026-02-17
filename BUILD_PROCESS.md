@@ -1,5 +1,6 @@
 # Day 1 [Feb 17]:
 ***
+## [morning]
 Yesterday I got the mail and read through all the requirements. First of all, I thought about building a CLI tool because agentic workflows are trending right now and becoming mainstream with the arrival of Claude Code, OpenCode, and the agentic thing called OpenClaw.
 
 A few months back, I built a CLI number guessing game (https://github.com/anjalxbt/numba-wumbo) using Rust to learn the language. I published it as a crate and it got 500+ all-time downloads (https://crates.io/crates/numba-wumbo).
@@ -18,7 +19,7 @@ So the better way to build this is as a web interface, so anyone with a phone or
 
 That’s why I’m choosing Next.js/React for this project. I’ve already built a few projects with this stack and have some OSS contributions as well.
 ***
-
+## [evening]
 
 Now I’ve decided what kind of thing I want to build. Now I need to decide why I should build this and how I should build this.
 
@@ -35,4 +36,21 @@ For example, in the laptop case, let’s say I’m only considering RAM. But the
 Let’s say the second criterion is budget. In that case, I’ll select the laptop with the lower price, since both of them have the same RAM.
 
 This is where decision-making starts getting layered.
+***
+## [night]
+Now I need to decide how to build this. Nowadays AI is very powerful. But before building anything, I want to train my brain to clearly define the “how” and the constraints.
+
+Until this point, I didn’t look at any resources. I wanted to think everything through on my own. I gave enough time to my brain to formulate a solution because I’ve been thinking about this problem since morning.
+
+So I came to a conclusion.
+
+A user can always select the best option if there is only one criterion. But if the options involve different criteria, we can isolate each criterion and evaluate them separately.
+
+So I thought about giving ratings to each option based on each criterion. Then multiply those ratings with the priority (weight) of that criterion. In that way, we can calculate a final score and find the best choice among the options.
+
+This was my solution.
+
+After that, I started searching about the `weighted scoring model`. I found a good article and attached it in today’s `RESEARCH_LOG.md` file. It gave me a much clearer structure, and most of my assumptions were actually right.
+
+Now it’s time to build the project.
 ***
