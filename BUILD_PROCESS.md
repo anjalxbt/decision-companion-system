@@ -1,5 +1,5 @@
-Day 1 [Feb 17]:
-
+# Day 1 [Feb 17]:
+***
 Yesterday I got the mail and read through all the requirements. First of all, I thought about building a CLI tool because agentic workflows are trending right now and becoming mainstream with the arrival of Claude Code, OpenCode, and the agentic thing called OpenClaw.
 
 A few months back, I built a CLI number guessing game (https://github.com/anjalxbt/numba-wumbo) using Rust to learn the language. I published it as a crate and it got 500+ all-time downloads (https://crates.io/crates/numba-wumbo).
@@ -17,3 +17,22 @@ A decision companion system shouldn’t be constrained to a small group of users
 So the better way to build this is as a web interface, so anyone with a phone or laptop can access it easily.
 
 That’s why I’m choosing Next.js/React for this project. I’ve already built a few projects with this stack and have some OSS contributions as well.
+***
+
+
+Now I’ve decided what kind of thing I want to build. Now I need to decide why I should build this and how I should build this.
+
+I thought about this all day and came to a conclusion. If I’m selecting from options based on only one criterion, I don’t really need a decision companion. I can easily pick the best one because there’s only one thing to worry about.
+
+For example, choosing a laptop from a list. If my only criterion is higher RAM, I’ll just go for the laptop with the highest RAM. Simple.
+
+Same in the case of selecting a candidate from a given list based only on their React skills. I can choose the one with more React projects and stronger fundamentals.
+
+The real problem arises when there are two options with the same result, or when we are considering multiple different criteria. That’s when we need a decision companion to make a better decision.
+
+For example, in the laptop case, let’s say I’m only considering RAM. But there are two laptops with the same RAM spec that I need. Now I’m confused. So I introduce another criterion.
+
+Let’s say the second criterion is budget. In that case, I’ll select the laptop with the lower price, since both of them have the same RAM.
+
+This is where decision-making starts getting layered.
+***
