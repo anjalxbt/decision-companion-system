@@ -54,3 +54,22 @@ After that, I started searching about the `weighted scoring model`. I found a go
 
 Now it’s time to build the project.
 ***
+# Day 2 [Feb 18]:
+## [evening]
+### Decision Framework (Inspired by Product School)
+
+After reading the article from Product School, I decided to follow this structured evaluation flow:
+
+1. Define the criteria that matter most
+2. Assign weights to each criterion
+3. Score each option against the criteria
+4. Calculate the weighted scores
+5. Analyze the results and prioritize
+
+
+### Development Updates
+
+- Installed Tailwind CSS for utility-first styling.
+- Installed shadcn/ui for ready-to-use, customizable components.
+- Began exploring design inspiration for UI direction.
+
