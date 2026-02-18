@@ -73,3 +73,9 @@ After reading the article from Product School, I decided to follow this structur
 - Installed shadcn/ui for ready-to-use, customizable components.
 - Began exploring design inspiration for UI direction.
 
+## [night]
+- Designed a simple landing page which describes what the app does.
+- Added a call to action on the landing page that routes to `/decide`, which is not implemented yet.
+- Also added a `/how-it-work` link at the top right corner of the landing page to describe how the app works. For now it’s empty will implement it once the app is complete.
+
+
