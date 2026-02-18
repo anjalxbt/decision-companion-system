@@ -3,7 +3,16 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const router = useRouter();
+
+  const handleDecideClick = () => {
+    new Audio("/typewriter-soft-click.wav").play();
+    setTimeout(() => router.push("/decide"), 150);
+  };
+
   return (
     <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-background px-6">
       <Link
@@ -45,15 +54,13 @@ export default function Home() {
         </p>
 
 
-        <Link href="/decide">
-          <Button
-            size="lg"
-            className="mt-2 min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98] sm:min-h-14 sm:px-10 sm:text-lg"
-            onClick={() => new Audio("/typewriter-soft-click.wav").play()}
-          >
-            Make Decision
-          </Button>
-        </Link>
+        <Button
+          size="lg"
+          className="mt-2 min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98] sm:min-h-14 sm:px-10 sm:text-lg"
+          onClick={handleDecideClick}
+        >
+          Make Decision
+        </Button>
       </main>
 
 
