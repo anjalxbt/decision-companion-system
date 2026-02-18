@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -39,6 +41,7 @@ export default function Home() {
         <Button
           size="lg"
           className="mt-2 min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98] sm:min-h-14 sm:px-10 sm:text-lg"
+          onClick={() => new Audio("/typewriter-soft-click.wav").play()}
         >
           Make Decision
         </Button>
