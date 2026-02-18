@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-background px-6">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 opacity-10"
+        style={{ backgroundImage: "url('/bg_image.png')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      />
 
       <div
         aria-hidden="true"
