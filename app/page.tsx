@@ -1,10 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-background px-6">
+      <Link
+        href="/how-it-works"
+        className="absolute top-6 right-6 z-20 text-xs text-muted-foreground transition-colors hover:text-foreground sm:text-sm"
+      >
+        [how it works]
+      </Link>
       <div
         aria-hidden="true"
         className="absolute inset-0 z-0 opacity-10"
@@ -38,13 +45,15 @@ export default function Home() {
         </p>
 
 
-        <Button
-          size="lg"
-          className="mt-2 min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98] sm:min-h-14 sm:px-10 sm:text-lg"
-          onClick={() => new Audio("/typewriter-soft-click.wav").play()}
-        >
-          Make Decision
-        </Button>
+        <Link href="/decide">
+          <Button
+            size="lg"
+            className="mt-2 min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98] sm:min-h-14 sm:px-10 sm:text-lg"
+            onClick={() => new Audio("/typewriter-soft-click.wav").play()}
+          >
+            Make Decision
+          </Button>
+        </Link>
       </main>
 
 
