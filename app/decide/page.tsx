@@ -10,6 +10,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function DecidePage() {
     const [question, setQuestion] = useState("");
@@ -39,7 +46,38 @@ export default function DecidePage() {
             />
 
             <Card className="relative z-10 w-full max-w-lg border-border/50 bg-card/80 shadow-xl backdrop-blur-sm">
-                <CardHeader>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <button
+                            type="button"
+                            className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                            aria-label="Help"
+                        >
+                            i
+                        </button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>How to frame your decision</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3 text-sm leading-relaxed ">
+                            <p>
+                                Write a clear, specific question that captures the choice you&apos;re
+                                facing. Good decisions start with good questions.
+                            </p>
+                            <ul className="list-disc space-y-1 pl-5">
+                                <li>Be specific — <em>&quot;Should I accept the offer from Company&nbsp;X?&quot;</em></li>
+                                <li>Focus on one decision at a time</li>
+                                <li>Keep it personal — what matters to <strong>you</strong></li>
+                            </ul>
+                            <p className="text-xs text-muted-foreground/70">
+                                You&apos;ll weigh the pros &amp; cons in the next steps.
+                            </p>
+                        </div>
+                    </DialogContent>
+                </Dialog>
+
+                <CardHeader className="pr-10">
                     <CardTitle className="text-center text-xl font-bold tracking-tight sm:text-2xl">
                         What do you want to make a decision about?
                     </CardTitle>
