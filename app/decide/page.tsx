@@ -16,10 +16,12 @@ export default function DecidePage() {
     const router = useRouter();
 
     const handleClear = () => {
+        new Audio("/typewriter-soft-click.wav").play();
         setQuestion("");
     };
 
     const handleNext = () => {
+        new Audio("/typewriter-soft-click.wav").play();
         if (!question.trim()) return;
 
     };
