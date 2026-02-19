@@ -10,7 +10,7 @@ export default function Home() {
 
   const handleDecideClick = () => {
     new Audio("/typewriter-soft-click.wav").play();
-    setTimeout(() => router.push("/decide"), 150);
+    setTimeout(() => router.push("/decide"), 10);
   };
 
   return (
