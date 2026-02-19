@@ -91,6 +91,18 @@ After reading the article from Product School, I decided to follow this structur
 - Added shadcn components like buttons, dialog, card, and input.
 
 - I’m also thinking about adding navigation buttons at the bottom for better navigation.
+## [night]
+The next step is to input different options.
+
+- From this step onwards, the code is getting bigger.
+- Now I need to think about state management.
+- First, I thought about adding authentication and a database. Then I paused. I want to make this simple and accessible for everyone without any hurdles. So I decided to avoid auth and store the previous results in local storage instead.
+
+My main inspiration for this was https://www.ilovepdf.com/ because whenever I need to do anything with a PDF, I go to that site. It doesn’t require any login and it does everything related to PDFs for me.
+
+But the concern was, I think they process the data on their servers. So I decided to avoid processing any data in a database and instead handle everything locally using local storage.
+
+
 
 
 
