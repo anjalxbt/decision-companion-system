@@ -77,5 +77,20 @@ After reading the article from Product School, I decided to follow this structur
 - Designed a simple landing page which describes what the app does.
 - Added a call to action on the landing page that routes to `/decide`, which is not implemented yet.
 - Also added a `/how-it-work` link at the top right corner of the landing page to describe how the app works. For now it’s empty will implement it once the app is complete.
+***
+# Day 3 [Feb 19]:
+## [morning]
+- From the above flow, the first thing I should ask the user is: “What do you want to decide?” because this helps identify the actual question they are trying to make a decision about.
+
+- I thought about the UI for a while and came to the conclusion that a form-like UI is better because people are very familiar with Google Forms, Typeform, and Airtable. These feel like surveys, and users already understand that flow.
+
+- So I developed a `/decide` page with a step tracker at the top to show where they are in the process. A question appears as the title, with an input field below it, and a button to move to the next card.
+
+- For every card, I decided to implement an “i” button at the right corner because any value change can alter the whole decision. These info buttons provide better clarity.
+
+- Added shadcn components like buttons, dialog, card, and input.
+
+- I’m also thinking about adding navigation buttons at the bottom for better navigation.
+
 
 
