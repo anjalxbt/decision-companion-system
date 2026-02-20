@@ -101,6 +101,14 @@ The next step is to input different options.
 My main inspiration for this was https://www.ilovepdf.com/ because whenever I need to do anything with a PDF, I go to that site. It doesn’t require any login and it does everything related to PDFs for me.
 
 But the concern was, I think they process the data on their servers. So I decided to avoid processing any data in a database and instead handle everything locally using local storage.
+***
+# Day 4 [Feb 20]:
+## [night]
+- The `/decide` page is getting bigger, so I introduced the Zustand state management library. I’m not a big fan of adding too many dependencies, but Zustand is very lightweight and it doesn’t require a provider.
+- Moved all the state into the store.
+- Now I need to split the steps into different components.
+
+*Nowadays shipping code is easy, but maintaining the code is hard.*
 
 
 
