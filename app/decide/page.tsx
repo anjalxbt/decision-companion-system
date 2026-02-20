@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
     Card,
@@ -17,57 +16,60 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-
-const STEPS = ["Question", "Options", "Criteria", "Weigh", "Decide"];
+import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 
 export default function DecidePage() {
-    const [currentStep, setCurrentStep] = useState(0);
-    const [question, setQuestion] = useState("");
-    const [options, setOptions] = useState(["", ""]);
     const router = useRouter();
+    const {
+        currentStep,
+        question,
+        options,
+        setQuestion,
+        clearQuestion,
+        updateOption,
+        addOption,
+        removeOption,
+        nextStep,
+        prevStep,
+        filledOptions,
+        canAdvanceStep2,
+    } = useDecideStore();
 
     // ── Helpers ──
     const playClick = () => new Audio("/typewriter-soft-click.wav").play();
 
-    const updateOption = (index: number, value: string) => {
-        setOptions((prev) => prev.map((o, i) => (i === index ? value.slice(0, 80) : o)));
-    };
-
-    const addOption = () => {
-        playClick();
-        setOptions((prev) => [...prev, ""]);
-    };
-
-    const removeOption = (index: number) => {
-        playClick();
-        setOptions((prev) => prev.filter((_, i) => i !== index));
-    };
-
     // ── Step 1 handlers ──
     const handleClearQuestion = () => {
         playClick();
-        setQuestion("");
+        clearQuestion();
     };
 
     const handleNextFromStep1 = () => {
         playClick();
         if (!question.trim()) return;
-        setCurrentStep(1);
+        nextStep();
     };
 
     // ── Step 2 handlers ──
     const handleBackFromStep2 = () => {
         playClick();
-        setCurrentStep(0);
+        prevStep();
     };
 
-    const filledOptions = options.filter((o) => o.trim().length > 0);
-    const canAdvanceStep2 = filledOptions.length >= 2;
+    const handleAddOption = () => {
+        playClick();
+        addOption();
+    };
+
+    const handleRemoveOption = (index: number) => {
+        playClick();
+        removeOption(index);
+    };
 
     const handleNextFromStep2 = () => {
         playClick();
-        if (!canAdvanceStep2) return;
-        // TODO: advance to step 3
+        if (!canAdvanceStep2()) return;
+
     };
 
     return (
@@ -315,7 +317,7 @@ export default function DecidePage() {
                                         {options.length > 2 && (
                                             <button
                                                 type="button"
-                                                onClick={() => removeOption(i)}
+                                                onClick={() => handleRemoveOption(i)}
                                                 className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                                                 aria-label={`Remove option ${i + 1}`}
                                             >
@@ -332,7 +334,7 @@ export default function DecidePage() {
                                     variant="outline"
                                     size="sm"
                                     className="mt-1 w-fit cursor-pointer gap-1.5 self-start bg-secondary text-muted-foreground hover:text-foreground"
-                                    onClick={addOption}
+                                    onClick={handleAddOption}
                                 >
                                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -342,7 +344,7 @@ export default function DecidePage() {
                             </div>
 
                             {/* Hint when fewer than 2 filled */}
-                            {filledOptions.length < 2 && options.some((o) => o.trim().length > 0) && (
+                            {filledOptions().length < 2 && options.some((o) => o.trim().length > 0) && (
                                 <p className="flex items-center gap-1 text-xs text-amber-500">
                                     <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
