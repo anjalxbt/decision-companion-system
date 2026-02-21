@@ -5,6 +5,7 @@ import { useDecideStore } from "@/lib/store/decide-store";
 import { StepTracker } from "@/components/step-tracker";
 import { StepQuestion } from "@/components/steps/step-question";
 import { StepOptions } from "@/components/steps/step-options";
+import { FooterNote } from "@/components/footer-note";
 
 export default function DecidePage() {
     const currentStep = useDecideStore((s) => s.currentStep);
@@ -31,10 +32,7 @@ export default function DecidePage() {
                 {currentStep === 1 && <StepOptions />}
             </Card>
 
-            {/* Footer note */}
-            <p className="relative z-10 mt-6 text-center text-xs text-muted-foreground/60">
-                Your answers stay on your device. Nothing is stored externally.
-            </p>
+            <FooterNote />
         </div>
     );
 }
