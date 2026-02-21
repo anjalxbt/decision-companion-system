@@ -128,6 +128,13 @@ But the concern was, I think they process the data on their servers. So I decide
 - This shouldn’t be allowed because a criterion with 0% weight is pointless. It doesn’t affect the result at all, so there is no need to include it.
 - Therefore, I need to change the code in a way that the user can move to the next step if and only if every criterion has a weight greater than 0%. If a criterion with 0% is present, the app should display a warning asking the user to remove that criterion from the previous step. And it’s easy to remove from the previous step because everything is stored in separate state.
 
+## [night]
+### bug found
+- Encountered a bug while testing step (3), which is the step for entering criteria. I was allowing the user to go to part 2 of step 3 even if there were empty criteria.
+- I found the bug in this way: I added three criteria with 50%, 30%, and 20%. Then I went back, removed the letters in the last criterion, and clicked next. The card displayed only two criteria, but the total still reflected 100%. The expected value was 80%.
+- Therefore, I updated the `canAdvanceCriteriaNames` function in the store to make sure all criteria are properly filled. If there is any criterion left empty, the app displays a warning asking the user to delete it.
+
+
 
 
 
