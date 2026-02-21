@@ -123,6 +123,12 @@ But the concern was, I think they process the data on their servers. So I decide
 - Later, I decided to split that card into two sub-parts: the first part for entering the criteria, and the second part for entering their priority weights.
 - This approach also enables the user to verify their criteria in the second part and make sure they entered everything correctly.
 
+### edge case
+- I was testing step 3 with different inputs, and I found a bug / edge case in my code. The user can move to the next step even if the priority weight of a criterion is 0%.
+- This shouldn’t be allowed because a criterion with 0% weight is pointless. It doesn’t affect the result at all, so there is no need to include it.
+- Therefore, I need to change the code in a way that the user can move to the next step if and only if every criterion has a weight greater than 0%. If a criterion with 0% is present, the app should display a warning asking the user to remove that criterion from the previous step. And it’s easy to remove from the previous step because everything is stored in separate state.
+
+
 
 
 
