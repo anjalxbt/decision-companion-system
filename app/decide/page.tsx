@@ -5,6 +5,7 @@ import { useDecideStore } from "@/lib/store/decide-store";
 import { StepTracker } from "@/components/step-tracker";
 import { StepQuestion } from "@/components/steps/step-question";
 import { StepOptions } from "@/components/steps/step-options";
+import { StepCriteria } from "@/components/steps/step-criteria";
 import { FooterNote } from "@/components/footer-note";
 
 export default function DecidePage() {
@@ -30,6 +31,7 @@ export default function DecidePage() {
             <Card className="relative z-10 w-full max-w-lg border-border/50 bg-card/80 shadow-xl backdrop-blur-sm">
                 {currentStep === 0 && <StepQuestion />}
                 {currentStep === 1 && <StepOptions />}
+                {currentStep === 2 && <StepCriteria />}
             </Card>
 
             <FooterNote />

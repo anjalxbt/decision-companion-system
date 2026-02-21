@@ -23,6 +23,7 @@ export function StepOptions() {
         addOption,
         removeOption,
         prevStep,
+        nextStep,
         filledOptions,
         canAdvanceStep2,
     } = useDecideStore();
@@ -47,7 +48,7 @@ export function StepOptions() {
     const handleNext = () => {
         playClick();
         if (!canAdvanceStep2()) return;
-        // TODO: advance to step 3
+        nextStep();
     };
 
     return (
