@@ -134,6 +134,14 @@ But the concern was, I think they process the data on their servers. So I decide
 - I found the bug in this way: I added three criteria with 50%, 30%, and 20%. Then I went back, removed the letters in the last criterion, and clicked next. The card displayed only two criteria, but the total still reflected 100%. The expected value was 80%.
 - Therefore, I updated the `canAdvanceCriteriaNames` function in the store to make sure all criteria are properly filled. If there is any criterion left empty, the app displays a warning asking the user to delete it.
 
+### thought / planning
+- Tomorrow I am planning to develop step 4, which is scoring weights against each option.
+- Like the previous card, it will follow a similar structure to step 3. It will contain sub-parts. The number of sub-parts is directly proportional to the number of criteria. If there are 5 criteria, there will be 5 sub-parts in step 4.
+- The UI design will be similar to part two of step 3 (criteria weights). The heading will show the criterion. Below that, there will be a label for each option, and opposite to that there will be an input box to enter the score.
+- Scoring will be out of 10. There is no condition like the previous step where the total should add up to some value.
+- The user can score each option out of 10 for every criterion.
+
+
 
 
 
