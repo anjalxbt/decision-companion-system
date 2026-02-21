@@ -1,0 +1,185 @@
+"use client";
+
+import {
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { STEPS, useDecideStore } from "@/lib/store/decide-store";
+
+export function StepOptions() {
+    const {
+        options,
+        updateOption,
+        addOption,
+        removeOption,
+        prevStep,
+        filledOptions,
+        canAdvanceStep2,
+    } = useDecideStore();
+
+    const playClick = () => new Audio("/typewriter-soft-click.wav").play();
+
+    const handleBack = () => {
+        playClick();
+        prevStep();
+    };
+
+    const handleAdd = () => {
+        playClick();
+        addOption();
+    };
+
+    const handleRemove = (index: number) => {
+        playClick();
+        removeOption(index);
+    };
+
+    const handleNext = () => {
+        playClick();
+        if (!canAdvanceStep2()) return;
+        // TODO: advance to step 3
+    };
+
+    return (
+        <>
+            {/* Help button */}
+            <Dialog>
+                <DialogTrigger asChild>
+                    <button
+                        type="button"
+                        className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                        aria-label="Help"
+                    >
+                        ?
+                    </button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Listing your options</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-3 text-sm leading-relaxed">
+                        <p>
+                            Add all the realistic options you&apos;re considering.
+                            Don&apos;t worry about ranking them yet — that comes later.
+                        </p>
+                        <ul className="list-disc space-y-1 pl-5">
+                            <li>Include at least <strong>2 options</strong> to compare</li>
+                            <li>Keep names short &amp; recognisable</li>
+                            <li>You can add more options anytime with the <strong>Add option</strong> button</li>
+                        </ul>
+                        <p className="text-xs text-muted-foreground/70">
+                            Next you&apos;ll define the criteria that matter most.
+                        </p>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            <CardHeader className="pb-2 pr-10">
+                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                    Step 2 of {STEPS.length}
+                </p>
+                <CardTitle className="text-xl font-bold tracking-tight sm:text-2xl">
+                    What options are you choosing between?
+                </CardTitle>
+                <p className="mt-1 text-sm text-muted-foreground">
+                    List the choices you&apos;re considering.
+                </p>
+            </CardHeader>
+
+            <CardContent className="flex flex-col gap-6 pt-2">
+
+                {/* Option inputs */}
+                <div className="-m-1 flex max-h-[200px] flex-col gap-3 overflow-y-auto p-1">
+                    <label className="text-xs font-medium text-muted-foreground">
+                        Your options
+                    </label>
+
+                    {options.map((opt, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-secondary text-xs font-semibold text-muted-foreground">
+                                {i + 1}
+                            </span>
+                            <Input
+                                type="text"
+                                placeholder={`Option ${i + 1}`}
+                                value={opt}
+                                onChange={(e) => updateOption(i, e.target.value)}
+                                className="h-11 flex-1 text-base"
+                                autoFocus={i === 0}
+                            />
+                            {options.length > 2 && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemove(i)}
+                                    className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                                    aria-label={`Remove option ${i + 1}`}
+                                >
+                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                    ))}
+
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-1 w-fit cursor-pointer gap-1.5 self-start bg-secondary text-muted-foreground hover:text-foreground"
+                        onClick={handleAdd}
+                    >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add option
+                    </Button>
+                </div>
+
+                {filledOptions().length < 2 && options.some((o) => o.trim().length > 0) && (
+                    <p className="flex items-center gap-1 text-xs text-amber-500">
+                        <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
+                        </svg>
+                        Add at least 2 options to continue.
+                    </p>
+                )}
+
+                <div className="h-px w-full bg-border/50" />
+
+                <div className="flex items-center justify-between">
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        className="cursor-pointer gap-1.5 text-muted-foreground hover:text-foreground"
+                        onClick={handleBack}
+                    >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back
+                    </Button>
+                    <Button
+                        className="cursor-pointer gap-2 px-8"
+                        onClick={handleNext}
+                        disabled={!canAdvanceStep2()}
+                    >
+                        Next
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </Button>
+                </div>
+            </CardContent>
+        </>
+    );
+}
