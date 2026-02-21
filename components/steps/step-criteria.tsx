@@ -307,6 +307,15 @@ export function StepCriteria() {
                     </p>
                 )}
 
+                {total === 100 && criteria.some((c, i) => c.trim() && weights[i] === 0) && (
+                    <p className="flex items-center gap-1 text-xs text-amber-500">
+                        <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
+                        </svg>
+                        Every criterion needs a weight above 0%. Remove it if it doesn&apos;t matter.
+                    </p>
+                )}
+
                 <div className="h-px w-full bg-border/50" />
 
                 <div className="flex items-center justify-between">
