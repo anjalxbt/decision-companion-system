@@ -146,12 +146,14 @@ export function StepOptions() {
                     </Button>
                 </div>
 
-                {filledOptions().length < 2 && options.some((o) => o.trim().length > 0) && (
+                {!canAdvanceStep2() && options.some((o) => o.trim().length > 0) && (
                     <p className="flex items-center gap-1 text-xs text-amber-500">
                         <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
                         </svg>
-                        Add at least 2 options to continue.
+                        {filledOptions().length < 2
+                            ? "Add at least 2 options to continue."
+                            : "Fill in all options or remove empty ones."}
                     </p>
                 )}
 

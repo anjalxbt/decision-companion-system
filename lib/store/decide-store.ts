@@ -51,7 +51,10 @@ export const useDecideStore = create<DecideState>((set, get) => ({
 
     // ── Derived ──
     filledOptions: () => get().options.filter((o) => o.trim().length > 0),
-    canAdvanceStep2: () => get().filledOptions().length >= 2,
+    canAdvanceStep2: () => {
+        const { options } = get();
+        return options.length >= 2 && options.every((o) => o.trim().length > 0);
+    },
     filledCriteria: () => get().criteria.filter((c) => c.trim().length > 0),
     totalWeight: () => get().weights.reduce((sum, w) => sum + w, 0),
     canAdvanceCriteriaNames: () => {
