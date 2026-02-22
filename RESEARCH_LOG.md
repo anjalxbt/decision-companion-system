@@ -20,3 +20,8 @@
 - https://youtu.be/6tEQ1nJZ51w?si=1fFIUEv8DtejlrSZ   
 - https://youtu.be/118ksTGQUs0?si=R0Sp6UPt_IXOh0mM   
 - https://www.reddit.com/r/reactjs/comments/riq9v6/i_chose_zustand_over_context_api_for_my_side/   
+---
+# Day 6 [Feb 22]:
+- "so i have a doubt in the scoring mechanism user always know whiich is good. but for a criteria like prize some poeple opt for higher prize and some people opt for lower prize. so how we handle this"
+- "in scoring out of 10 put float instead of integers. what do you think abou this change?"
+- "do i need to include 0 (0-10) in scoring instead of 1-10"
