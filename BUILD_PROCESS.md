@@ -148,6 +148,18 @@ But the concern was, I think they process the data on their servers. So I decide
 - Why I developed this step in this way is because from the beginning itself it was clear that a user can always choose the best option if there is only one criterion.
 - Therefore, in this component, instead of giving scores in a single go, I developed it in a way that the user can compare options based on one criterion at a time, isolating each one.
 
+## [night]
+### edge case
+- One thing I noticed is that in most cases this can be ignored, but for criteria like `price`, some people prefer a higher price and some people prefer a lower price. So I need to clearly define how to handle this. I will come back after researching about it.
+- After the research, I found out that scoring is subjective. The user defines what “good” means. If the user prefers a low price, they should score a $500 laptop as 9/10 and a $2000 laptop as 2/10. If the user prefers a premium product, they should reverse the score.
+- So I updated the help dialog in step 4 (`step-weigh.tsx`) for better clarity.
+
+### thoughts
+- I also thought about changing the data type of the score to float.
+- I thought about changing the scale from 1–10 to 0–10.
+- After researching, I rejected both.
+
+
 
 
 
