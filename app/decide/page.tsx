@@ -6,6 +6,7 @@ import { StepTracker } from "@/components/step-tracker";
 import { StepQuestion } from "@/components/steps/step-question";
 import { StepOptions } from "@/components/steps/step-options";
 import { StepCriteria } from "@/components/steps/step-criteria";
+import { StepWeigh } from "@/components/steps/step-weigh";
 import { FooterNote } from "@/components/footer-note";
 
 export default function DecidePage() {
@@ -32,6 +33,7 @@ export default function DecidePage() {
                 {currentStep === 0 && <StepQuestion />}
                 {currentStep === 1 && <StepOptions />}
                 {currentStep === 2 && <StepCriteria />}
+                {currentStep === 3 && <StepWeigh />}
             </Card>
 
             <FooterNote />

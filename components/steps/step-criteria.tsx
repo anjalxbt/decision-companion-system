@@ -28,6 +28,7 @@ export function StepCriteria() {
         setCriteriaSubStep,
         prevStep,
         nextStep,
+        initScores,
         filledCriteria,
         totalWeight,
         canAdvanceCriteriaNames,
@@ -52,6 +53,7 @@ export function StepCriteria() {
             setCriteriaSubStep(1);
         } else {
             if (!canAdvanceCriteriaWeights()) return;
+            initScores();
             nextStep();
         }
     };
