@@ -154,10 +154,12 @@ But the concern was, I think they process the data on their servers. So I decide
 - After the research, I found out that scoring is subjective. The user defines what “good” means. If the user prefers a low price, they should score a $500 laptop as 9/10 and a $2000 laptop as 2/10. If the user prefers a premium product, they should reverse the score.
 - So I updated the help dialog in step 4 (`step-weigh.tsx`) for better clarity.
 
-### thoughts
+### thoughts / planning
 - I also thought about changing the data type of the score to float.
 - I thought about changing the scale from 1–10 to 0–10.
 - After researching, I rejected both.
+- For the last step, I am thinking about displaying a table to show all the values the user has entered, just to make sure everything is correct. I will be referring to the weighted model example table from the article I mentioned in the research log (Product School article).
+- Below that, there will be a “Decide” button to calculate the result.
 
 
 
