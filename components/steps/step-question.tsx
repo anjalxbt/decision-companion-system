@@ -59,7 +59,7 @@ export function StepQuestion() {
                             <li>Focus on one decision at a time</li>
                             <li>Keep it personal — what matters to <strong>you</strong></li>
                         </ul>
-                        <p className="text-xs text-muted-foreground/70">
+                        <p className="text-xs text-muted-foreground">
                             You&apos;ll weigh the pros &amp; cons in the next steps.
                         </p>
                     </div>

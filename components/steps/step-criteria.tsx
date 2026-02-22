@@ -101,7 +101,7 @@ export function StepCriteria() {
                                 <li>Keep them distinct — avoid overlapping factors</li>
                                 <li>Less is more — 3 to 6 criteria usually works best</li>
                             </ul>
-                            <p className="text-xs text-muted-foreground/70">
+                            <p className="text-xs text-muted-foreground">
                                 Next you&apos;ll assign priority weights to each criterion.
                             </p>
                         </div>
@@ -236,7 +236,7 @@ export function StepCriteria() {
                             <li>All weights must add up to exactly <strong>100%</strong></li>
                             <li>Example: <em>Performance 50%, Portability 25%, Battery 15%, Price 10%</em></li>
                         </ul>
-                        <p className="text-xs text-muted-foreground/70">
+                        <p className="text-xs text-muted-foreground">
                             These weights determine how much each factor influences the final result.
                         </p>
                     </div>

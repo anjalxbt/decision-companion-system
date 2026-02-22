@@ -74,19 +74,22 @@ export function StepWeigh() {
                     </DialogHeader>
                     <div className="space-y-3 text-sm leading-relaxed">
                         <p>
-                            Rate each option on a scale of <strong>1 to 10</strong> for the
-                            current criterion. A higher score means the option performs
-                            better on that factor.
+                            Rate each option on a scale of <strong>1 to 10</strong> based on
+                            how well it satisfies <em>your preference</em> for this criterion.
                         </p>
                         <ul className="list-disc space-y-1 pl-5">
-                            <li><strong>10</strong> = excellent, best possible fit</li>
-                            <li><strong>5</strong> = average, acceptable</li>
-                            <li><strong>1</strong> = poor, worst possible fit</li>
-                            <li>Be honest — this drives the final recommendation</li>
+                            <li><strong>10</strong> = perfectly meets your expectation</li>
+                            <li><strong>5</strong> = acceptable, middle ground</li>
+                            <li><strong>1</strong> = doesn&apos;t meet it at all</li>
                         </ul>
-                        <p className="text-xs text-muted-foreground/70">
-                            You&apos;ll score each option for every criterion, one at a time.
+                        <p className="text-xs text-red-500">
+                            Tip: For criteria like &quot;Price&quot;, score based on what you
+                            value. For example:
                         </p>
+                        <ul className="list-disc space-y-1 pl-5 text-xs text-red-500">
+                            <li>If you prefer low price → score a $500 laptop <strong>9/10</strong> and a $2000 laptop <strong>2/10</strong></li>
+                            <li>If you prefer premium → reverse those scores</li>
+                        </ul>
                     </div>
                 </DialogContent>
             </Dialog>

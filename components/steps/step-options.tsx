@@ -78,7 +78,7 @@ export function StepOptions() {
                             <li>Keep names short &amp; recognisable</li>
                             <li>You can add more options anytime with the <strong>Add option</strong> button</li>
                         </ul>
-                        <p className="text-xs text-muted-foreground/70">
+                        <p className="text-xs text-muted-foreground">
                             Next you&apos;ll define the criteria that matter most.
                         </p>
                     </div>
