@@ -10,6 +10,8 @@ interface DecideState {
     criteria: string[];
     weights: number[];
     criteriaSubStep: 0 | 1; // 0 = entering names, 1 = assigning weights
+    scores: number[][];     // scores[criterionIndex][optionIndex] — value 0-10
+    weighSubStep: number;   // which criterion is being scored
 
     // ── Derived ──
     filledOptions: () => string[];
@@ -18,6 +20,7 @@ interface DecideState {
     totalWeight: () => number;
     canAdvanceCriteriaNames: () => boolean;
     canAdvanceCriteriaWeights: () => boolean;
+    canAdvanceWeighSubStep: () => boolean;
 
     // ── Actions ──
     setCurrentStep: (step: number) => void;
@@ -31,6 +34,9 @@ interface DecideState {
     removeCriterion: (index: number) => void;
     setWeight: (index: number, value: number) => void;
     setCriteriaSubStep: (sub: 0 | 1) => void;
+    initScores: () => void;
+    setScore: (criterionIdx: number, optionIdx: number, value: number) => void;
+    setWeighSubStep: (sub: number) => void;
     nextStep: () => void;
     prevStep: () => void;
     reset: () => void;
@@ -43,6 +49,8 @@ const initialState = {
     criteria: ["", ""],
     weights: [0, 0],
     criteriaSubStep: 0 as 0 | 1,
+    scores: [] as number[][],
+    weighSubStep: 0,
 };
 
 export const useDecideStore = create<DecideState>((set, get) => ({
@@ -66,6 +74,13 @@ export const useDecideStore = create<DecideState>((set, get) => ({
         const total = get().totalWeight();
         const allFilled = criteria.every((c, i) => !c.trim() || weights[i] > 0);
         return total === 100 && get().filledCriteria().length >= 2 && allFilled;
+    },
+    canAdvanceWeighSubStep: () => {
+        const { scores, weighSubStep } = get();
+        const filledOpts = get().filledOptions();
+        if (!scores[weighSubStep]) return false;
+        return scores[weighSubStep].length === filledOpts.length &&
+            scores[weighSubStep].every((s) => s >= 1 && s <= 10);
     },
 
     // ── Actions ──
@@ -109,6 +124,26 @@ export const useDecideStore = create<DecideState>((set, get) => ({
         })),
 
     setCriteriaSubStep: (sub) => set({ criteriaSubStep: sub }),
+
+    initScores: () => {
+        const filled = get().filledCriteria();
+        const filledOpts = get().filledOptions();
+        set({
+            scores: filled.map(() => filledOpts.map(() => 0)),
+            weighSubStep: 0,
+        });
+    },
+
+    setScore: (criterionIdx, optionIdx, value) =>
+        set((state) => ({
+            scores: state.scores.map((row, ci) =>
+                ci === criterionIdx
+                    ? row.map((s, oi) => (oi === optionIdx ? Math.max(0, Math.min(10, value)) : s))
+                    : row
+            ),
+        })),
+
+    setWeighSubStep: (sub) => set({ weighSubStep: sub }),
 
     nextStep: () =>
         set((state) => ({
