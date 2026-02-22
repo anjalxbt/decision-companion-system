@@ -140,6 +140,13 @@ But the concern was, I think they process the data on their servers. So I decide
 - The UI design will be similar to part two of step 3 (criteria weights). The heading will show the criterion. Below that, there will be a label for each option, and opposite to that there will be an input box to enter the score.
 - Scoring will be out of 10. There is no condition like the previous step where the total should add up to some value.
 - The user can score each option out of 10 for every criterion.
+***
+
+# Day 6 [Feb 22]:
+## [evening]
+- Developed the weighing step as I mentioned above.
+- Why I developed this step in this way is because from the beginning itself it was clear that a user can always choose the best option if there is only one criterion.
+- Therefore, in this component, instead of giving scores in a single go, I developed it in a way that the user can compare options based on one criterion at a time, isolating each one.
 
 
 
