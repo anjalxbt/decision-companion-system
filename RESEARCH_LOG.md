@@ -25,3 +25,10 @@
 - "so i have a doubt in the scoring mechanism user always know whiich is good. but for a criteria like prize some poeple opt for higher prize and some people opt for lower prize. so how we handle this"
 - "in scoring out of 10 put float instead of integers. what do you think abou this change?"
 - "do i need to include 0 (0-10) in scoring instead of 1-10"
+
+### table inspirations
+- https://ui.shadcn.com/docs/components/radix/table
+- https://dribbble.com/search/table-ui
+- https://21st.dev/community/components/s/table
+- https://images.ctfassets.net/6nwv0fapso8r/7awAo8MqT0dLrhBs4TZpKt/896563f3592f6234cc8ebd72cc58b06f/Weighted_Scoring_Model_Example_I.svg
+
