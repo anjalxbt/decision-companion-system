@@ -161,6 +161,10 @@ But the concern was, I think they process the data on their servers. So I decide
 - For the last step, I am thinking about displaying a table to show all the values the user has entered, just to make sure everything is correct. I will be referring to the weighted model example table from the article I mentioned in the research log (Product School article).
 - Below that, there will be a “Decide” button to calculate the result.
 
+### Development Updates
+- developed the last step that displays all the entered values to take the final decision
+
+
 
 
 
