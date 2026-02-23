@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { useDecideStore } from "@/lib/store/decide-store";
 import { StepTracker } from "@/components/step-tracker";
@@ -11,7 +12,20 @@ import { StepDecide } from "@/components/steps/step-decide";
 import { FooterNote } from "@/components/footer-note";
 
 export default function DecidePage() {
+    const [hydrated, setHydrated] = useState(false);
     const currentStep = useDecideStore((s) => s.currentStep);
+
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
+
+    if (!hydrated) {
+        return (
+            <div className="flex min-h-dvh items-center justify-center bg-secondary">
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            </div>
+        );
+    }
 
     return (
         <div className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-secondary px-6 py-12">
