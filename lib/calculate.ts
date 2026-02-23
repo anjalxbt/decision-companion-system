@@ -60,3 +60,96 @@ export function calculateScores(
 
     return results;
 }
+
+// ── Explanation Generator ──
+
+export interface Explanation {
+    summary: string;
+    keyStrength: string;
+    decisiveFactor: string;
+    tradeOff: string | null; // null if winner scored 10/10 on everything
+}
+
+/**
+ * Generate a dynamic, data-driven explanation for why the #1 option won.
+ *
+ * @param ranked   - output of calculateScores (sorted best-first)
+ * @param criteria - array of criterion names
+ * @param weights  - percentage weight per criterion
+ * @param scores   - 2D array: scores[criterionIndex][optionIndex]
+ * @param options  - array of option names (same order as used in calculateScores)
+ */
+export function generateExplanation(
+    ranked: RankedOption[],
+    criteria: string[],
+    weights: number[],
+    scores: number[][],
+    options: string[],
+): Explanation {
+    const winner = ranked[0];
+    const runnerUp = ranked.length > 1 ? ranked[1] : null;
+
+    // Map option name → original index
+    const winnerIdx = options.indexOf(winner.name);
+    const runnerUpIdx = runnerUp ? options.indexOf(runnerUp.name) : -1;
+
+    // ── 1. Summary ──
+    const summary = `${winner.name} scored ${winner.score}/100, making it your strongest choice.`;
+
+    // ── 2. Key Strength — criterion with highest weighted contribution ──
+    let bestCi = 0;
+    let bestContribution = 0;
+
+    for (let ci = 0; ci < criteria.length; ci++) {
+        const contribution = ((scores[ci]?.[winnerIdx] ?? 0) * (weights[ci] ?? 0)) / 10;
+        if (contribution > bestContribution) {
+            bestContribution = contribution;
+            bestCi = ci;
+        }
+    }
+
+    const keyStrength = `It excels in ${criteria[bestCi]} (${scores[bestCi]?.[winnerIdx]}/10), which carries ${weights[bestCi]}% of your weight.`;
+
+    // ── 3. Decisive Factor — biggest weighted score gap vs runner-up ──
+    let decisiveFactor: string;
+
+    if (runnerUp && runnerUpIdx >= 0) {
+        let biggestGapCi = 0;
+        let biggestGap = -Infinity;
+
+        for (let ci = 0; ci < criteria.length; ci++) {
+            const winScore = scores[ci]?.[winnerIdx] ?? 0;
+            const runScore = scores[ci]?.[runnerUpIdx] ?? 0;
+            const weightedGap = (winScore - runScore) * (weights[ci] ?? 0);
+            if (weightedGap > biggestGap) {
+                biggestGap = weightedGap;
+                biggestGapCi = ci;
+            }
+        }
+
+        const winS = scores[biggestGapCi]?.[winnerIdx] ?? 0;
+        const runS = scores[biggestGapCi]?.[runnerUpIdx] ?? 0;
+
+        decisiveFactor = `The deciding factor was ${criteria[biggestGapCi]} — it scored ${winS} vs ${runnerUp.name}'s ${runS}, on a criterion weighted at ${weights[biggestGapCi]}%.`;
+    } else {
+        decisiveFactor = `With only one option evaluated, ${winner.name} is the clear choice.`;
+    }
+
+    // ── 4. Trade-off — winner's lowest raw score ──
+    let worstCi = 0;
+    let worstScore = 11;
+
+    for (let ci = 0; ci < criteria.length; ci++) {
+        const s = scores[ci]?.[winnerIdx] ?? 0;
+        if (s < worstScore) {
+            worstScore = s;
+            worstCi = ci;
+        }
+    }
+
+    const tradeOff = worstScore < 10
+        ? `However, it scored lowest in ${criteria[worstCi]} (${worstScore}/10) — something to keep in mind.`
+        : null;
+
+    return { summary, keyStrength, decisiveFactor, tradeOff };
+}
