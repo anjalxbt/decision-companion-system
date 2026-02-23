@@ -181,6 +181,12 @@ But the concern was, I think they process the data on their servers. So I decide
   `Score(option) = Σ (normalized_criteria_value × weight)`.
 - I also need to decide how to calculate and handle ties.
 
+### Development Updates
+- Developed the core logic for taking the decision based on the above-mentioned formula.
+- For now, I am giving the same rank when a tie occurs. I will figure out what to do when a tie happens later.
+- Decided to go with a score range from 1–100.
+
+
 
 
 
