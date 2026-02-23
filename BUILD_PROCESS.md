@@ -163,7 +163,13 @@ But the concern was, I think they process the data on their servers. So I decide
 
 ### Development Updates
 - developed the last step that displays all the entered values to take the final decision
-
+***
+# Day 7 [Feb 23]:
+## [morning]
+### thoughts / planning
+- Before calculating the final result, I want to do one thing. The main problem that arises when filling a form-like application is that if a refresh happens or the connection is lost, all the previously entered data is gone.
+- To avoid that, I want to store the result in local storage after completion.
+- That is why I put a curly bracket of localStorage on the client state in the design diagram.
 
 
 
