@@ -173,8 +173,13 @@ But the concern was, I think they process the data on their servers. So I decide
 ### Development Updates
 - After researching, I found out that Zustand has a `persist` middleware for handling local storage. So I implemented that feature.
 - It was causing a flash in the UI because of hydration issues. This happened due to the difference in state between the server and the browser. I fixed it by adding a `useEffect` in the page.
+- Also developed a “Start Over” button to clear all the client state and start a new decision.
 
-
+## [evening]
+### thoughts / planning
+- Now it’s time to build the core logic of the decision. I will be following this formula:  
+  `Score(option) = Σ (normalized_criteria_value × weight)`.
+- I also need to decide how to calculate and handle ties.
 
 
 

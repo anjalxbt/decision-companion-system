@@ -41,3 +41,6 @@
 - https://zustand.docs.pmnd.rs/integrations/persisting-store-data#storage
 - how to solve hydration error in next js
 - https://nextjs.org/docs/messages/react-hydration-error 
+---
+- "i am using this formuale for weighted decision making Score(option) = Σ (normalized_criteria_value × weight). so should i score the final value in 10 or 100"
+- "how i am supposed to handle tie in this situation"
