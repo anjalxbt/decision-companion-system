@@ -10,6 +10,7 @@ import { StepCriteria } from "@/components/steps/step-criteria";
 import { StepWeigh } from "@/components/steps/step-weigh";
 import { StepDecide } from "@/components/steps/step-decide";
 import { FooterNote } from "@/components/footer-note";
+import { StartOver } from "@/components/start-over";
 
 export default function DecidePage() {
     const [hydrated, setHydrated] = useState(false);
@@ -29,6 +30,8 @@ export default function DecidePage() {
 
     return (
         <div className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-secondary px-6 py-12">
+
+            <StartOver />
 
             {/* Ambient blobs */}
             <div
