@@ -44,3 +44,5 @@
 ---
 - "i am using this formuale for weighted decision making Score(option) = Σ (normalized_criteria_value × weight). so should i score the final value in 10 or 100"
 - "how i am supposed to handle tie in this situation"
+---
+- "how to develop a dynamic explanation generator for the decision result. this is the data structure that is used to store the values."

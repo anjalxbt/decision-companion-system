@@ -186,7 +186,12 @@ But the concern was, I think they process the data on their servers. So I decide
 - For now, I am giving the same rank when a tie occurs. I will figure out what to do when a tie happens later.
 - Decided to go with a score range from 1–100.
 
-
+## [night]
+### thoughts / planning
+- I need to develop a dynamic explanation generator.
+- Need to build the UI to display the result with the explanation.
+- Planning to add some graphs, maybe.
+- So by today or by tomorrow, 90% of the app will be built.
 
 
 
