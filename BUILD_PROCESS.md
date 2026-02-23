@@ -170,7 +170,9 @@ But the concern was, I think they process the data on their servers. So I decide
 - Before calculating the final result, I want to do one thing. The main problem that arises when filling a form-like application is that if a refresh happens or the connection is lost, all the previously entered data is gone.
 - To avoid that, I want to store the result in local storage after completion.
 - That is why I put a curly bracket of localStorage on the client state in the design diagram.
-
+### Development Updates
+- After researching, I found out that Zustand has a `persist` middleware for handling local storage. So I implemented that feature.
+- It was causing a flash in the UI because of hydration issues. This happened due to the difference in state between the server and the browser. I fixed it by adding a `useEffect` in the page.
 
 
 

@@ -32,3 +32,12 @@
 - https://21st.dev/community/components/s/table
 - https://images.ctfassets.net/6nwv0fapso8r/7awAo8MqT0dLrhBs4TZpKt/896563f3592f6234cc8ebd72cc58b06f/Weighted_Scoring_Model_Example_I.svg
 
+---
+
+# Day 7 [Feb 23]:
+
+- "in next js how do we store state in local storage"
+- "does zustand have a feature of storing state in local storage"
+- https://zustand.docs.pmnd.rs/integrations/persisting-store-data#storage
+- how to solve hydration error in next js
+- https://nextjs.org/docs/messages/react-hydration-error 
