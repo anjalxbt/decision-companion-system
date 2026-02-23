@@ -193,7 +193,8 @@ But the concern was, I think they process the data on their servers. So I decide
 - Planning to add some graphs, maybe.
 - So by today or by tomorrow, 90% of the app will be built.
 
-
+### Development Updates
+- built a dynamic explanation generator
 
 
 
