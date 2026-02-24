@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getHistory, deleteResult, type SavedResult } from "@/lib/history";
+import { useDecideStore } from "@/lib/store/decide-store";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
 export default function ProfilePage() {
     const [history, setHistory] = useState<SavedResult[]>([]);
     const [mounted, setMounted] = useState(false);
+    const router = useRouter();
+    const reset = useDecideStore((s) => s.reset);
 
     useEffect(() => {
         setHistory(getHistory());
@@ -43,6 +47,18 @@ export default function ProfilePage() {
                 </svg>
                 Back
             </Link>
+
+            {/* New decision button */}
+            <button
+                type="button"
+                onClick={() => { reset(); router.push("/decide"); }}
+                className="fixed top-4 right-4 z-50 flex cursor-pointer items-center gap-1.5 bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/80"
+            >
+                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                New decision
+            </button>
 
             <div className="flex w-full max-w-lg flex-col overflow-hidden" style={{ flex: 1 }}>
                 <h1 className="mb-1 text-2xl font-bold tracking-tight">Profile</h1>
