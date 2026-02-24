@@ -35,7 +35,7 @@ export default function ProfilePage() {
 
             {/* Back button */}
             <Link
-                href="/"
+                href="/decide"
                 className="fixed top-4 left-4 z-50 flex items-center gap-1.5 bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
             >
                 <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

@@ -20,7 +20,9 @@ export interface SavedResult {
 export function saveResult(result: Omit<SavedResult, "id" | "savedAt">): SavedResult {
     const entry: SavedResult = {
         ...result,
-        id: crypto.randomUUID(),
+        id: typeof crypto !== "undefined" && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
         savedAt: new Date().toISOString(),
     };
 
