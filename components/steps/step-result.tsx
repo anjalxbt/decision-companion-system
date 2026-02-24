@@ -82,7 +82,7 @@ export function StepResult() {
 
     const handleStartOver = () => {
         reset();
-        router.push("/");
+        router.push("/decide");
     };
 
     return (
