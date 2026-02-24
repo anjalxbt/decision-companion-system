@@ -158,7 +158,7 @@ export function StepResult() {
                     <ChartContainer config={chartConfig} className="h-[220px] w-full">
                         <BarChart
                             data={chartData}
-                            margin={{ top: 8, right: 8, bottom: 0, left: -16 }}
+                            margin={{ top: 8, right: 8, bottom: 16, left: -16 }}
                         >
                             <CartesianGrid vertical={false} strokeDasharray="3 3" />
                             <XAxis
@@ -166,6 +166,11 @@ export function StepResult() {
                                 tickLine={false}
                                 axisLine={false}
                                 tick={{ fontSize: 10 }}
+                                interval={0}
+                                angle={-35}
+                                textAnchor="end"
+                                height={50}
+                                padding={{ left: 10, right: 10 }}
                             />
                             <YAxis
                                 type="number"
