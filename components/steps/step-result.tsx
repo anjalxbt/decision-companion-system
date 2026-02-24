@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
     CardContent,
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/chart";
 import { useDecideStore } from "@/lib/store/decide-store";
 import { calculateScores, generateExplanation } from "@/lib/calculate";
+import { saveResult } from "@/lib/history";
 
 // Medal emojis for top 3
 const MEDALS = ["🥇", "🥈", "🥉"];
@@ -79,6 +80,21 @@ export function StepResult() {
         });
         return config;
     }, [options]);
+
+    const [saved, setSaved] = useState(false);
+
+    const handleSave = () => {
+        saveResult({
+            question,
+            ranked,
+            explanation,
+            criteria,
+            weights,
+            scores,
+            options,
+        });
+        setSaved(true);
+    };
 
     const handleStartOver = () => {
         reset();
@@ -194,12 +210,34 @@ export function StepResult() {
 
                 <div className="h-px w-full bg-border/50" />
                 {/* ── Actions ── */}
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center gap-3">
                     <Button
-                        className="cursor-pointer gap-2 px-8"
+                        variant="outline"
+                        className="cursor-pointer gap-2"
+                        onClick={handleSave}
+                        disabled={saved}
+                    >
+                        {saved ? (
+                            <>
+                                <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                Saved!
+                            </>
+                        ) : (
+                            <>
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0z" />
+                                </svg>
+                                Save result
+                            </>
+                        )}
+                    </Button>
+                    <Button
+                        className="cursor-pointer gap-2"
                         onClick={handleStartOver}
                     >
-                        Make another decision
+                        New decision
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
