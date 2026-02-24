@@ -17,9 +17,9 @@ export default function Home() {
     <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-background px-6">
       <Link
         href="/how-it-works"
-        className="absolute top-6 right-6 z-20 text-xs text-muted-foreground transition-colors hover:text-foreground sm:text-sm"
+        className="fixed top-4 right-[7.5rem] z-50 flex items-center gap-1.5 bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
       >
-        [how it works]
+        How it works
       </Link>
       <div
         aria-hidden="true"

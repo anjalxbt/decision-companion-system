@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
+import { ProfileButton } from "@/components/profile-button";
 import "./globals.css";
 
 const robotoMono = Roboto_Mono({
@@ -24,8 +25,10 @@ export default function RootLayout({
       <body
         className={`${robotoMono.variable} ${robotoMono.className} antialiased h-dvh overflow-hidden`}
       >
+        <ProfileButton />
         {children}
       </body>
     </html>
   );
 }
+
