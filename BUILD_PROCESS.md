@@ -196,6 +196,25 @@ But the concern was, I think they process the data on their servers. So I decide
 ### Development Updates
 - built a dynamic explanation generator
 
+***
+# Day 8 [Feb 24]:
+## [morning]
+### development update
+- Developed the result card.
+- Displayed the rank in a leaderboard style.
+- Below that, rendered the explanation.
+- Instead of graphs, used charts to show the score by criteria.
+
+### thoughts / planning
+- Next, I need to develop a profile page to display all the previous results.
+- Want to store the final result in local storage for this.
+
+### edge case
+- I tested two options with the same values.
+- They are getting the same rank, but the explanation generator is only giving a summary for the first entered option by comparing it with the second one. The problem is both are actually the same.
+- I need to think about how to handle this situation.
+
+
 
 
 
