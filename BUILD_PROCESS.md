@@ -214,6 +214,11 @@ But the concern was, I think they process the data on their servers. So I decide
 - They are getting the same rank, but the explanation generator is only giving a summary for the first entered option by comparing it with the second one. The problem is both are actually the same.
 - I need to think about how to handle this situation.
 
+## [evening]
+- Developed a “Save Result” button in the result card to store the result in local storage.
+- Wrote functions for writing and deleting results from local storage.
+- Built a profile button at the top right corner of all pages.
+- Rendered all the saved results on the profile page.
 
 
 
