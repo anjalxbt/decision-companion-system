@@ -24,6 +24,7 @@ export function StepDecide() {
         prevStep,
         setWeighSubStep,
         setCurrentStep,
+        setShowResult,
         filledCriteria,
         filledOptions,
     } = useDecideStore();
@@ -42,7 +43,7 @@ export function StepDecide() {
 
     const handleDecide = () => {
         playClick();
-        // TODO: calculate result
+        setShowResult(true);
     };
 
     return (
