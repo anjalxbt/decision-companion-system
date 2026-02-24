@@ -151,7 +151,7 @@ export function StepResult() {
                 {/* ── Explanation ── */}
                 <div className="flex flex-col gap-2">
                     <label className="text-xs font-medium text-muted-foreground">
-                        Why {ranked[0]?.name}?
+                        {explanation.isTie ? "It's a tie!" : `Why ${ranked[0]?.name}?`}
                     </label>
                     <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
                         <p>{explanation.summary}</p>

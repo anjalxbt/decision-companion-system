@@ -64,6 +64,7 @@ export function calculateScores(
 // ── Explanation Generator ──
 
 export interface Explanation {
+    isTie: boolean;
     summary: string;
     keyStrength: string;
     decisiveFactor: string;
@@ -71,13 +72,35 @@ export interface Explanation {
 }
 
 /**
- * Generate a dynamic, data-driven explanation for why the #1 option won.
- *
- * @param ranked   - output of calculateScores (sorted best-first)
- * @param criteria - array of criterion names
- * @param weights  - percentage weight per criterion
- * @param scores   - 2D array: scores[criterionIndex][optionIndex]
- * @param options  - array of option names (same order as used in calculateScores)
+ * Find the criterion where an option has the highest weighted contribution.
+ */
+function findBestCriterion(
+    optIdx: number,
+    criteria: string[],
+    weights: number[],
+    scores: number[][],
+): { name: string; score: number; weight: number } {
+    let bestCi = 0;
+    let bestContribution = 0;
+
+    for (let ci = 0; ci < criteria.length; ci++) {
+        const contribution = ((scores[ci]?.[optIdx] ?? 0) * (weights[ci] ?? 0)) / 10;
+        if (contribution > bestContribution) {
+            bestContribution = contribution;
+            bestCi = ci;
+        }
+    }
+
+    return {
+        name: criteria[bestCi],
+        score: scores[bestCi]?.[optIdx] ?? 0,
+        weight: weights[bestCi],
+    };
+}
+
+/**
+ * Generate a dynamic, data-driven explanation for the result.
+ * Handles both clear winners and ties.
  */
 export function generateExplanation(
     ranked: RankedOption[],
@@ -88,29 +111,42 @@ export function generateExplanation(
 ): Explanation {
     const winner = ranked[0];
     const runnerUp = ranked.length > 1 ? ranked[1] : null;
+    const isTie = runnerUp !== null && runnerUp.score === winner.score;
 
-    // Map option name → original index
     const winnerIdx = options.indexOf(winner.name);
     const runnerUpIdx = runnerUp ? options.indexOf(runnerUp.name) : -1;
 
-    // ── 1. Summary ──
-    const summary = `${winner.name} scored ${winner.score}/100, making it your strongest choice.`;
+    // ── TIE PATH ──
+    if (isTie && runnerUp) {
+        // Collect all tied options
+        const tiedOptions = ranked.filter((r) => r.score === winner.score);
+        const tiedNames = tiedOptions.map((r) => r.name);
 
-    // ── 2. Key Strength — criterion with highest weighted contribution ──
-    let bestCi = 0;
-    let bestContribution = 0;
+        const summary =
+            tiedNames.length === 2
+                ? `${tiedNames[0]} and ${tiedNames[1]} are tied at ${winner.score}/100 — both are equally strong choices.`
+                : `${tiedNames.slice(0, -1).join(", ")} and ${tiedNames[tiedNames.length - 1]} are tied at ${winner.score}/100.`;
 
-    for (let ci = 0; ci < criteria.length; ci++) {
-        const contribution = ((scores[ci]?.[winnerIdx] ?? 0) * (weights[ci] ?? 0)) / 10;
-        if (contribution > bestContribution) {
-            bestContribution = contribution;
-            bestCi = ci;
-        }
+        // Highlight what each tied option excels at
+        const strengths = tiedOptions.map((r) => {
+            const idx = options.indexOf(r.name);
+            const best = findBestCriterion(idx, criteria, weights, scores);
+            return `${r.name} excels in ${best.name} (${best.score}/10, ${best.weight}% weight)`;
+        });
+
+        const keyStrength = strengths.join(", while ") + ".";
+
+        const decisiveFactor = "The scores are identical — use your gut or add more criteria to break the tie.";
+
+        return { isTie: true, summary, keyStrength, decisiveFactor, tradeOff: null };
     }
 
-    const keyStrength = `It excels in ${criteria[bestCi]} (${scores[bestCi]?.[winnerIdx]}/10), which carries ${weights[bestCi]}% of your weight.`;
+    // ── CLEAR WINNER PATH ──
+    const summary = `${winner.name} scored ${winner.score}/100, making it your strongest choice.`;
 
-    // ── 3. Decisive Factor — biggest weighted score gap vs runner-up ──
+    const best = findBestCriterion(winnerIdx, criteria, weights, scores);
+    const keyStrength = `It excels in ${best.name} (${best.score}/10), which carries ${best.weight}% of your weight.`;
+
     let decisiveFactor: string;
 
     if (runnerUp && runnerUpIdx >= 0) {
@@ -135,7 +171,7 @@ export function generateExplanation(
         decisiveFactor = `With only one option evaluated, ${winner.name} is the clear choice.`;
     }
 
-    // ── 4. Trade-off — winner's lowest raw score ──
+    // Trade-off — winner's lowest raw score
     let worstCi = 0;
     let worstScore = 11;
 
@@ -151,5 +187,6 @@ export function generateExplanation(
         ? `However, it scored lowest in ${criteria[worstCi]} (${worstScore}/10) — something to keep in mind.`
         : null;
 
-    return { summary, keyStrength, decisiveFactor, tradeOff };
+    return { isTie: false, summary, keyStrength, decisiveFactor, tradeOff };
 }
+
