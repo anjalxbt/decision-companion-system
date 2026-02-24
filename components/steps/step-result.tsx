@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
     CardContent,
@@ -42,6 +42,8 @@ export function StepResult() {
         filledCriteria,
         filledOptions,
         reset,
+        resultSaved,
+        setResultSaved,
     } = useDecideStore();
 
     const criteria = filledCriteria();
@@ -81,8 +83,6 @@ export function StepResult() {
         return config;
     }, [options]);
 
-    const [saved, setSaved] = useState(false);
-
     const handleSave = () => {
         saveResult({
             question,
@@ -93,7 +93,7 @@ export function StepResult() {
             scores,
             options,
         });
-        setSaved(true);
+        setResultSaved(true);
     };
 
     const handleStartOver = () => {
@@ -215,9 +215,9 @@ export function StepResult() {
                         variant="outline"
                         className="cursor-pointer gap-2"
                         onClick={handleSave}
-                        disabled={saved}
+                        disabled={resultSaved}
                     >
-                        {saved ? (
+                        {resultSaved ? (
                             <>
                                 <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />

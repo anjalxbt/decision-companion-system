@@ -14,6 +14,7 @@ interface DecideState {
     scores: number[][]; // scores[criterionIndex][optionIndex] — value 0-10
     weighSubStep: number; // which criterion is being scored
     showResult: boolean;
+    resultSaved: boolean;
 
     // ── Derived ──
     filledOptions: () => string[];
@@ -40,6 +41,7 @@ interface DecideState {
     setScore: (criterionIdx: number, optionIdx: number, value: number) => void;
     setWeighSubStep: (sub: number) => void;
     setShowResult: (show: boolean) => void;
+    setResultSaved: (saved: boolean) => void;
     nextStep: () => void;
     prevStep: () => void;
     reset: () => void;
@@ -55,6 +57,7 @@ const initialState = {
     scores: [] as number[][],
     weighSubStep: 0,
     showResult: false,
+    resultSaved: false,
 };
 
 export const useDecideStore = create<DecideState>()(
@@ -153,6 +156,8 @@ export const useDecideStore = create<DecideState>()(
 
             setShowResult: (show) => set({ showResult: show }),
 
+            setResultSaved: (saved) => set({ resultSaved: saved }),
+
             nextStep: () =>
                 set((state) => ({
                     currentStep: Math.min(state.currentStep + 1, STEPS.length - 1),
@@ -177,6 +182,7 @@ export const useDecideStore = create<DecideState>()(
                 scores: state.scores,
                 weighSubStep: state.weighSubStep,
                 showResult: state.showResult,
+                resultSaved: state.resultSaved,
             }),
         }
     )
