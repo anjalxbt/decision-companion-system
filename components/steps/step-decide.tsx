@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
 export function StepDecide() {
     const {
@@ -102,9 +103,7 @@ export function StepDecide() {
                         className="cursor-pointer gap-1.5 text-muted-foreground hover:text-foreground"
                         onClick={handleBack}
                     >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
+                        <ChevronLeftIcon />
                         Back
                     </Button>
                     <Button
@@ -112,9 +111,7 @@ export function StepDecide() {
                         onClick={handleDecide}
                     >
                         Decide
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
+                        <ChevronRightIcon />
                     </Button>
                 </div>
             </CardContent>

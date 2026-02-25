@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon, PlusIcon, WarningIcon } from "@/components/icons";
 
 export function StepOptions() {
     const {
@@ -125,9 +126,7 @@ export function StepOptions() {
                                     className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                                     aria-label={`Remove option ${i + 1}`}
                                 >
-                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    <XIcon />
                                 </button>
                             )}
                         </div>
@@ -139,18 +138,14 @@ export function StepOptions() {
                         className="mt-1 w-fit cursor-pointer gap-1.5 self-start bg-secondary text-muted-foreground hover:text-foreground"
                         onClick={handleAdd}
                     >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
+                        <PlusIcon />
                         Add option
                     </Button>
                 </div>
 
                 {!canAdvanceStep2() && options.some((o) => o.trim().length > 0) && (
                     <p className="flex items-center gap-1 text-xs text-amber-500">
-                        <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
-                        </svg>
+                        <WarningIcon />
                         {filledOptions().length < 2
                             ? "Add at least 2 options to continue."
                             : "Fill in all options or remove empty ones."}
@@ -166,9 +161,7 @@ export function StepOptions() {
                         className="cursor-pointer gap-1.5 text-muted-foreground hover:text-foreground"
                         onClick={handleBack}
                     >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
+                        <ChevronLeftIcon />
                         Back
                     </Button>
                     <Button
@@ -177,9 +170,7 @@ export function StepOptions() {
                         disabled={!canAdvanceStep2()}
                     >
                         Next
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
+                        <ChevronRightIcon />
                     </Button>
                 </div>
             </CardContent>

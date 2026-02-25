@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
+import { ChevronLeftIcon, ChevronRightIcon, WarningIcon } from "@/components/icons";
 
 export function StepWeigh() {
     const {
@@ -137,9 +138,7 @@ export function StepWeigh() {
 
                 {!canAdvanceWeighSubStep() && scores[weighSubStep]?.some((s) => s > 0) && (
                     <p className="flex items-center gap-1 text-xs text-amber-500">
-                        <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
-                        </svg>
+                        <WarningIcon />
                         Score every option between 1 and 10 to continue.
                     </p>
                 )}
@@ -153,9 +152,7 @@ export function StepWeigh() {
                         className="cursor-pointer gap-1.5 text-muted-foreground hover:text-foreground"
                         onClick={handleBack}
                     >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
+                        <ChevronLeftIcon />
                         Back
                     </Button>
                     <Button
@@ -164,9 +161,7 @@ export function StepWeigh() {
                         disabled={!canAdvanceWeighSubStep()}
                     >
                         {isLastCriterion ? "Finish" : "Next"}
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
+                        <ChevronRightIcon />
                     </Button>
                 </div>
             </CardContent>

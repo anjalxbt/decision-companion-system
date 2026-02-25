@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
+import { ChevronRightIcon, WarningIcon } from "@/components/icons";
 
 export function StepQuestion() {
     const { question, setQuestion, clearQuestion, nextStep } = useDecideStore();
@@ -103,9 +104,7 @@ export function StepQuestion() {
 
                     {question.trim().length > 0 && !question.trim().endsWith("?") && (
                         <p className="flex items-center gap-1 text-xs text-amber-500">
-                            <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18A9 9 0 0012 3z" />
-                            </svg>
+                            <WarningIcon />
                             Tip: Phrasing as a question helps clarify the decision.
                         </p>
                     )}
@@ -129,9 +128,7 @@ export function StepQuestion() {
                         disabled={!question.trim()}
                     >
                         Next
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
+                        <ChevronRightIcon />
                     </Button>
                 </div>
             </CardContent>
