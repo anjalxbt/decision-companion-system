@@ -15,6 +15,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
+import { playClick } from "@/lib/sound";
 
 export function StepCriteria() {
     const {
@@ -35,7 +36,6 @@ export function StepCriteria() {
         canAdvanceCriteriaWeights,
     } = useDecideStore();
 
-    const playClick = () => new Audio("/typewriter-soft-click.wav").play();
 
     const handleBack = () => {
         playClick();

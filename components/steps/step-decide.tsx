@@ -16,6 +16,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
+import { playClick } from "@/lib/sound";
 
 export function StepDecide() {
     const {
@@ -29,7 +30,6 @@ export function StepDecide() {
         filledOptions,
     } = useDecideStore();
 
-    const playClick = () => new Audio("/typewriter-soft-click.wav").play();
 
     const criteria = filledCriteria();
     const options = filledOptions();
