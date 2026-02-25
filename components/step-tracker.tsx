@@ -17,11 +17,9 @@ export function StepTracker() {
                                 />
                                 <div
                                     className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors
-                      ${isActive
+                      ${isActive || isComplete
                                             ? "border-primary bg-primary text-primary-foreground"
-                                            : isComplete
-                                                ? "border-primary bg-primary text-primary-foreground"
-                                                : "border-border bg-background text-muted-foreground"
+                                            : "border-border bg-background text-muted-foreground"
                                         }`}
                                 >
                                     {isComplete ? (
