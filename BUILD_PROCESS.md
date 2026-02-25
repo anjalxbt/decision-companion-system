@@ -236,3 +236,10 @@ But the concern was, I think they process the data on their servers. So I decide
 - You may ask why I put a “Save Result” button instead of saving the result directly to local storage.
 - The inspiration came from ChatGPT. Even though we can ask questions and they get saved in chat history, they also implemented a `temporary chat` feature to search something without saving it. So what if the user wants to take a decision without storing any data? If the user wants to save it, they have the option to do so.
 - We are not forcing the user to save data. Everything is the user’s choice.
+
+## [evening]
+### development updates
+- The app is almost mature now.
+- Today I mainly focused on refactoring the code for better maintainability.
+### thoughts / planning
+- Now I need to test the app with different cases to find any flaws.
