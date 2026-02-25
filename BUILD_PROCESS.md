@@ -220,6 +220,19 @@ But the concern was, I think they process the data on their servers. So I decide
 - Built a profile button at the top right corner of all pages.
 - Rendered all the saved results on the profile page.
 
+## [night]
+- After researching how to handle ties, three options came up:  
+  1) Acknowledge the tie  
+  2) Tiebreaker by Best Single Criterion  
+  3) Tiebreaker by Fewest Weaknesses  
+- I chose option 1 because the whole point of this app is to help users decide with clarity. Forcing a fake winner is not the point. When it’s genuinely tied, the user should understand what each option is best at and make the final decision themselves. Or they can add more criteria to break the tie.
+- So I modified the explanation generator to handle these situations.
+- Another thing: what if the user gives the same scores for each option across all criteria? There is no real point in adding identical scores everywhere, but the explanation generator is capable of handling this case as well.
 
 
-
+# Day 9 [Feb 25]:
+## [morning]
+### thoughts / planning
+- You may ask why I put a “Save Result” button instead of saving the result directly to local storage.
+- The inspiration came from ChatGPT. Even though we can ask questions and they get saved in chat history, they also implemented a `temporary chat` feature to search something without saving it. So what if the user wants to take a decision without storing any data? If the user wants to save it, they have the option to do so.
+- We are not forcing the user to save data. Everything is the user’s choice.

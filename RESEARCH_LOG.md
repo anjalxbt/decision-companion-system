@@ -48,3 +48,7 @@
 - "how to develop a dynamic explanation generator for the decision result. this is the data structure that is used to store the values."
 - google search "graph components react": https://search.brave.com/search?q=graph+components+react&summary=1&conversation=08c53e819a6c2df5ac3bfd23df85691f4c92
 - https://ui.shadcn.com/docs/components/radix/chart
+---
+# Day 8 [Feb 24]:
+- "how to handle tie when both options have same score"
+- "what do to do when every options have identical scores"
