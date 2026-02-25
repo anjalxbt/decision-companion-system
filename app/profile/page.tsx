@@ -13,19 +13,8 @@ import {
 } from "@/components/ui/chart";
 import { getHistory, deleteResult, type SavedResult } from "@/lib/history";
 import { useDecideStore } from "@/lib/store/decide-store";
+import { MEDALS, CHART_COLORS } from "@/lib/constants";
 
-const MEDALS = ["🥇", "🥈", "🥉"];
-
-const CHART_COLORS = [
-    "hsl(142, 76%, 36%)",
-    "hsl(217, 91%, 60%)",
-    "hsl(48, 96%, 53%)",
-    "hsl(280, 67%, 55%)",
-    "hsl(16, 90%, 55%)",
-    "hsl(190, 80%, 45%)",
-    "hsl(340, 75%, 55%)",
-    "hsl(100, 60%, 45%)",
-];
 
 // ── Expanded card detail component ──
 function ResultDetail({ result }: { result: SavedResult }) {

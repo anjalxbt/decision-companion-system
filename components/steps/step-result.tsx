@@ -17,21 +17,9 @@ import {
 import { useDecideStore } from "@/lib/store/decide-store";
 import { calculateScores, generateExplanation } from "@/lib/calculate";
 import { saveResult } from "@/lib/history";
+import { MEDALS, CHART_COLORS } from "@/lib/constants";
 
-// Medal emojis for top 3
-const MEDALS = ["🥇", "🥈", "🥉"];
 
-// Colors for the bar chart
-const CHART_COLORS = [
-    "hsl(142, 76%, 36%)",  // green
-    "hsl(217, 91%, 60%)",  // blue
-    "hsl(48, 96%, 53%)",   // yellow
-    "hsl(280, 67%, 55%)",  // purple
-    "hsl(16, 90%, 55%)",   // orange
-    "hsl(190, 80%, 45%)",  // teal
-    "hsl(340, 75%, 55%)",  // pink
-    "hsl(100, 60%, 45%)",  // lime
-];
 
 export function StepResult() {
     const router = useRouter();
