@@ -14,6 +14,7 @@ import {
 import { getHistory, deleteResult, type SavedResult } from "@/lib/history";
 import { useDecideStore } from "@/lib/store/decide-store";
 import { MEDALS, CHART_COLORS } from "@/lib/constants";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 
 // ── Expanded card detail component ──
@@ -184,11 +185,7 @@ export default function ProfilePage() {
     };
 
     if (!mounted) {
-        return (
-            <div className="flex min-h-dvh items-center justify-center bg-secondary">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-            </div>
-        );
+        return <LoadingSpinner />;
     }
 
     return (

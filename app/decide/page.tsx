@@ -12,6 +12,7 @@ import { StepDecide } from "@/components/steps/step-decide";
 import { StepResult } from "@/components/steps/step-result";
 import { FooterNote } from "@/components/footer-note";
 import { StartOver } from "@/components/start-over";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 export default function DecidePage() {
     const [hydrated, setHydrated] = useState(false);
@@ -23,11 +24,7 @@ export default function DecidePage() {
     }, []);
 
     if (!hydrated) {
-        return (
-            <div className="flex min-h-dvh items-center justify-center bg-secondary">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-            </div>
-        );
+        return <LoadingSpinner />;
     }
 
     return (
