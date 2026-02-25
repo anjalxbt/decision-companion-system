@@ -20,9 +20,11 @@ interface DecideState {
     // ── Derived ──
     filledOptions: () => string[];
     canAdvanceStep2: () => boolean;
+    hasDuplicateOptions: () => boolean;
     filledCriteria: () => string[];
     totalWeight: () => number;
     canAdvanceCriteriaNames: () => boolean;
+    hasDuplicateCriteria: () => boolean;
     canAdvanceCriteriaWeights: () => boolean;
     canAdvanceWeighSubStep: () => boolean;
 
@@ -69,15 +71,25 @@ export const useDecideStore = create<DecideState>()(
 
             // ── Derived ──
             filledOptions: () => get().options.filter((o) => o.trim().length > 0),
+            hasDuplicateOptions: () => {
+                const filled = get().options.filter((o) => o.trim().length > 0).map((o) => o.trim().toLowerCase());
+                return new Set(filled).size !== filled.length;
+            },
             canAdvanceStep2: () => {
                 const { options } = get();
-                return options.length >= 2 && options.every((o) => o.trim().length > 0);
+                if (options.length < 2 || !options.every((o) => o.trim().length > 0)) return false;
+                return !get().hasDuplicateOptions();
             },
             filledCriteria: () => get().criteria.filter((c) => c.trim().length > 0),
             totalWeight: () => get().weights.reduce((sum, w) => sum + w, 0),
+            hasDuplicateCriteria: () => {
+                const filled = get().criteria.filter((c) => c.trim().length > 0).map((c) => c.trim().toLowerCase());
+                return new Set(filled).size !== filled.length;
+            },
             canAdvanceCriteriaNames: () => {
                 const { criteria } = get();
-                return criteria.length >= 2 && criteria.every((c) => c.trim().length > 0);
+                if (criteria.length < 2 || !criteria.every((c) => c.trim().length > 0)) return false;
+                return !get().hasDuplicateCriteria();
             },
             canAdvanceCriteriaWeights: () => {
                 const { criteria, weights } = get();

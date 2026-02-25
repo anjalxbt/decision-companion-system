@@ -30,6 +30,7 @@ export function StepCriteria() {
         totalWeight,
         canAdvanceCriteriaNames,
         canAdvanceCriteriaWeights,
+        hasDuplicateCriteria,
     } = useDecideStore();
 
 
@@ -146,9 +147,11 @@ export function StepCriteria() {
                     {!canAdvanceCriteriaNames() && criteria.some((c) => c.trim().length > 0) && (
                         <p className="flex items-center gap-1 text-xs text-amber-500">
                             <WarningIcon />
-                            {filled.length < 2
-                                ? "Add at least 2 criteria to continue."
-                                : "Fill in all criteria or remove empty ones."}
+                            {hasDuplicateCriteria()
+                                ? "Each criterion must have a unique name."
+                                : filled.length < 2
+                                    ? "Add at least 2 criteria to continue."
+                                    : "Fill in all criteria or remove empty ones."}
                         </p>
                     )}
 

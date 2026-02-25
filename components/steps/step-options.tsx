@@ -23,6 +23,7 @@ export function StepOptions() {
         nextStep,
         filledOptions,
         canAdvanceStep2,
+        hasDuplicateOptions,
     } = useDecideStore();
 
 
@@ -125,9 +126,11 @@ export function StepOptions() {
                 {!canAdvanceStep2() && options.some((o) => o.trim().length > 0) && (
                     <p className="flex items-center gap-1 text-xs text-amber-500">
                         <WarningIcon />
-                        {filledOptions().length < 2
-                            ? "Add at least 2 options to continue."
-                            : "Fill in all options or remove empty ones."}
+                        {hasDuplicateOptions()
+                            ? "Each option must have a unique name."
+                            : filledOptions().length < 2
+                                ? "Add at least 2 options to continue."
+                                : "Fill in all options or remove empty ones."}
                     </p>
                 )}
 
