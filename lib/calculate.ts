@@ -127,16 +127,30 @@ export function generateExplanation(
                 ? `${tiedNames[0]} and ${tiedNames[1]} are tied at ${winner.score}/100 — both are equally strong choices.`
                 : `${tiedNames.slice(0, -1).join(", ")} and ${tiedNames[tiedNames.length - 1]} are tied at ${winner.score}/100.`;
 
-        // Highlight what each tied option excels at
-        const strengths = tiedOptions.map((r) => {
-            const idx = options.indexOf(r.name);
-            const best = findBestCriterion(idx, criteria, weights, scores);
-            return `${r.name} excels in ${best.name} (${best.score}/10, ${best.weight}% weight)`;
+        // Check if all tied options have identical scores on every criterion
+        const tiedIndices = tiedOptions.map((r) => options.indexOf(r.name));
+        const allIdentical = criteria.every((_, ci) => {
+            const first = scores[ci]?.[tiedIndices[0]] ?? 0;
+            return tiedIndices.every((oi) => (scores[ci]?.[oi] ?? 0) === first);
         });
 
-        const keyStrength = strengths.join(", while ") + ".";
+        let keyStrength: string;
 
-        const decisiveFactor = "The scores are identical — use your gut or add more criteria to break the tie.";
+        if (allIdentical) {
+            keyStrength = "All options performed identically across every criterion — there is no meaningful difference between them.";
+        } else {
+            // Highlight what each tied option excels at
+            const strengths = tiedOptions.map((r) => {
+                const idx = options.indexOf(r.name);
+                const best = findBestCriterion(idx, criteria, weights, scores);
+                return `${r.name} excels in ${best.name} (${best.score}/10, ${best.weight}% weight)`;
+            });
+            keyStrength = strengths.join(", while ") + ".";
+        }
+
+        const decisiveFactor = allIdentical
+            ? "Consider adding more criteria or adjusting weights to differentiate between them."
+            : "The scores are identical — use your gut or add more criteria to break the tie.";
 
         return { isTie: true, summary, keyStrength, decisiveFactor, tradeOff: null };
     }
