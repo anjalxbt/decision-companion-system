@@ -52,3 +52,6 @@
 # Day 8 [Feb 24]:
 - "how to handle tie when both options have same score"
 - "what do to do when every options have identical scores"
+---
+# Day 9 [Feb 25]:
+- "i am using localstorage for my app. what is the max storage capacity of local storage"

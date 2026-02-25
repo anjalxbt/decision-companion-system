@@ -243,3 +243,10 @@ But the concern was, I think they process the data on their servers. So I decide
 - Today I mainly focused on refactoring the code for better maintainability.
 ### thoughts / planning
 - Now I need to test the app with different cases to find any flaws.
+
+## [night]
+### findings and solutions
+- After testing with different test cases, I found some flaws.
+- Adding more than 8 options or criteria makes the app unusable and the chart unreadable. Therefore, I fixed the maximum number of options and criteria to 8.
+- Also found out that I can add the same options and criteria repeatedly. So I implemented a duplicate finder in the store to prevent that.
+- Because the data is stored in local storage, after researching I found that the maximum capacity is around 5MB–10MB. So I added a storage full indicator, so the user can delete unwanted results and then come back and save new ones.
