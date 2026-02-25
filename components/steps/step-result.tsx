@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
     CardContent,
@@ -71,8 +71,10 @@ export function StepResult() {
         return config;
     }, [options]);
 
+    const [saveFailed, setSaveFailed] = useState(false);
+
     const handleSave = () => {
-        saveResult({
+        const saved = saveResult({
             question,
             ranked,
             explanation,
@@ -81,7 +83,12 @@ export function StepResult() {
             scores,
             options,
         });
-        setResultSaved(true);
+        if (saved) {
+            setResultSaved(true);
+            setSaveFailed(false);
+        } else {
+            setSaveFailed(true);
+        }
     };
 
     const handleStartOver = () => {
@@ -211,6 +218,13 @@ export function StepResult() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                 </svg>
                                 Saved!
+                            </>
+                        ) : saveFailed ? (
+                            <>
+                                <svg className="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Storage full
                             </>
                         ) : (
                             <>
