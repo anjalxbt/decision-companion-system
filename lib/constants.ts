@@ -1,3 +1,6 @@
+export const MAX_OPTIONS = 8;
+export const MAX_CRITERIA = 8;
+
 export const MEDALS = ["🥇", "🥈", "🥉"];
 
 export const CHART_COLORS = [

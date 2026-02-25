@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { MAX_OPTIONS, MAX_CRITERIA } from "@/lib/constants";
 
 export const STEPS = ["Question", "Options", "Criteria", "Weigh", "Decide"] as const;
 
@@ -105,16 +106,22 @@ export const useDecideStore = create<DecideState>()(
                 })),
 
             addOption: () =>
-                set((state) => ({ options: [...state.options, ""] })),
+                set((state) => {
+                    if (state.options.length >= MAX_OPTIONS) return state;
+                    return { options: [...state.options, ""] };
+                }),
 
             removeOption: (index) =>
                 set((state) => ({ options: state.options.filter((_, i) => i !== index) })),
 
             addCriterion: () =>
-                set((state) => ({
-                    criteria: [...state.criteria, ""],
-                    weights: [...state.weights, 0],
-                })),
+                set((state) => {
+                    if (state.criteria.length >= MAX_CRITERIA) return state;
+                    return {
+                        criteria: [...state.criteria, ""],
+                        weights: [...state.weights, 0],
+                    };
+                }),
 
             updateCriterion: (index, value) =>
                 set((state) => ({

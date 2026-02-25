@@ -11,6 +11,7 @@ import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon, PlusIcon, WarningIcon } from "@/components/icons";
 import { HelpDialog } from "@/components/help-dialog";
+import { MAX_OPTIONS } from "@/lib/constants";
 
 export function StepOptions() {
     const {
@@ -114,6 +115,7 @@ export function StepOptions() {
                         size="sm"
                         className="mt-1 w-fit cursor-pointer gap-1.5 self-start bg-secondary text-muted-foreground hover:text-foreground"
                         onClick={handleAdd}
+                        disabled={options.length >= MAX_OPTIONS}
                     >
                         <PlusIcon />
                         Add option

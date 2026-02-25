@@ -11,6 +11,7 @@ import { HelpDialog } from "@/components/help-dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon, PlusIcon, WarningIcon } from "@/components/icons";
+import { MAX_CRITERIA } from "@/lib/constants";
 
 export function StepCriteria() {
     const {
@@ -135,6 +136,7 @@ export function StepCriteria() {
                             size="sm"
                             className="mt-1 w-fit cursor-pointer gap-1.5 self-start bg-secondary text-muted-foreground hover:text-foreground"
                             onClick={handleAdd}
+                            disabled={criteria.length >= MAX_CRITERIA}
                         >
                             <PlusIcon />
                             Add criterion
