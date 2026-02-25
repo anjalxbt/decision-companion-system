@@ -7,13 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import { HelpDialog } from "@/components/help-dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon, PlusIcon, WarningIcon } from "@/components/icons";
@@ -76,38 +70,21 @@ export function StepCriteria() {
     if (criteriaSubStep === 0) {
         return (
             <>
-                {/* Help button */}
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <button
-                            type="button"
-                            className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                            aria-label="Help"
-                        >
-                            ?
-                        </button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Choosing your criteria</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-3 text-sm leading-relaxed">
-                            <p>
-                                Criteria are the factors that matter most when making this
-                                decision. Think about what would make one option better than another.
-                            </p>
-                            <ul className="list-disc space-y-1 pl-5">
-                                <li>Add at least <strong>2 criteria</strong></li>
-                                <li>Examples: <em>Price, Performance, Battery life, Portability</em></li>
-                                <li>Keep them distinct — avoid overlapping factors</li>
-                                <li>Less is more — 3 to 6 criteria usually works best</li>
-                            </ul>
-                            <p className="text-xs text-muted-foreground">
-                                Next you&apos;ll assign priority weights to each criterion.
-                            </p>
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                <HelpDialog title="Choosing your criteria">
+                    <p>
+                        Criteria are the factors that matter most when making this
+                        decision. Think about what would make one option better than another.
+                    </p>
+                    <ul className="list-disc space-y-1 pl-5">
+                        <li>Add at least <strong>2 criteria</strong></li>
+                        <li>Examples: <em>Price, Performance, Battery life, Portability</em></li>
+                        <li>Keep them distinct — avoid overlapping factors</li>
+                        <li>Less is more — 3 to 6 criteria usually works best</li>
+                    </ul>
+                    <p className="text-xs text-muted-foreground">
+                        Next you&apos;ll assign priority weights to each criterion.
+                    </p>
+                </HelpDialog>
 
                 <CardHeader className="pb-2 pr-10">
                     <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary">
@@ -202,37 +179,20 @@ export function StepCriteria() {
     // ── Sub-step 1: Assign weights ──
     return (
         <>
-            {/* Help button */}
-            <Dialog>
-                <DialogTrigger asChild>
-                    <button
-                        type="button"
-                        className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                        aria-label="Help"
-                    >
-                        ?
-                    </button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Assigning priority weights</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-3 text-sm leading-relaxed">
-                        <p>
-                            Distribute <strong>100%</strong> across your criteria based on how
-                            important each one is to your decision.
-                        </p>
-                        <ul className="list-disc space-y-1 pl-5">
-                            <li>Higher % = more important to you</li>
-                            <li>All weights must add up to exactly <strong>100%</strong></li>
-                            <li>Example: <em>Performance 50%, Portability 25%, Battery 15%, Price 10%</em></li>
-                        </ul>
-                        <p className="text-xs text-muted-foreground">
-                            These weights determine how much each factor influences the final result.
-                        </p>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            <HelpDialog title="Assigning priority weights">
+                <p>
+                    Distribute <strong>100%</strong> across your criteria based on how
+                    important each one is to your decision.
+                </p>
+                <ul className="list-disc space-y-1 pl-5">
+                    <li>Higher % = more important to you</li>
+                    <li>All weights must add up to exactly <strong>100%</strong></li>
+                    <li>Example: <em>Performance 50%, Portability 25%, Battery 15%, Price 10%</em></li>
+                </ul>
+                <p className="text-xs text-muted-foreground">
+                    These weights determine how much each factor influences the final result.
+                </p>
+            </HelpDialog>
 
             <CardHeader className="pb-2 pr-10">
                 <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary">

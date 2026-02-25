@@ -7,13 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import { HelpDialog } from "@/components/help-dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
 import { ChevronLeftIcon, ChevronRightIcon, WarningIcon } from "@/components/icons";
@@ -58,42 +52,25 @@ export function StepWeigh() {
 
     return (
         <>
-            {/* Help button */}
-            <Dialog>
-                <DialogTrigger asChild>
-                    <button
-                        type="button"
-                        className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                        aria-label="Help"
-                    >
-                        ?
-                    </button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Scoring your options</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-3 text-sm leading-relaxed">
-                        <p>
-                            Rate each option on a scale of <strong>1 to 10</strong> based on
-                            how well it satisfies <em>your preference</em> for this criterion.
-                        </p>
-                        <ul className="list-disc space-y-1 pl-5">
-                            <li><strong>10</strong> = perfectly meets your expectation</li>
-                            <li><strong>5</strong> = acceptable, middle ground</li>
-                            <li><strong>1</strong> = doesn&apos;t meet it at all</li>
-                        </ul>
-                        <p className="text-xs text-red-500">
-                            Tip: For criteria like &quot;Price&quot;, score based on what you
-                            value. For example:
-                        </p>
-                        <ul className="list-disc space-y-1 pl-5 text-xs text-red-500">
-                            <li>If you prefer low price → score a $500 laptop <strong>9/10</strong> and a $2000 laptop <strong>2/10</strong></li>
-                            <li>If you prefer premium → reverse those scores</li>
-                        </ul>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            <HelpDialog title="Scoring your options">
+                <p>
+                    Rate each option on a scale of <strong>1 to 10</strong> based on
+                    how well it satisfies <em>your preference</em> for this criterion.
+                </p>
+                <ul className="list-disc space-y-1 pl-5">
+                    <li><strong>10</strong> = perfectly meets your expectation</li>
+                    <li><strong>5</strong> = acceptable, middle ground</li>
+                    <li><strong>1</strong> = doesn&apos;t meet it at all</li>
+                </ul>
+                <p className="text-xs text-red-500">
+                    Tip: For criteria like &quot;Price&quot;, score based on what you
+                    value. For example:
+                </p>
+                <ul className="list-disc space-y-1 pl-5 text-xs text-red-500">
+                    <li>If you prefer low price → score a $500 laptop <strong>9/10</strong> and a $2000 laptop <strong>2/10</strong></li>
+                    <li>If you prefer premium → reverse those scores</li>
+                </ul>
+            </HelpDialog>
 
             <CardHeader className="pb-2 pr-10">
                 <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary">

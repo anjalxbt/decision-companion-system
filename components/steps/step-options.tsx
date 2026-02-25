@@ -7,16 +7,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
 import { STEPS, useDecideStore } from "@/lib/store/decide-store";
 import { playClick } from "@/lib/sound";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon, PlusIcon, WarningIcon } from "@/components/icons";
+import { HelpDialog } from "@/components/help-dialog";
 
 export function StepOptions() {
     const {
@@ -54,37 +48,20 @@ export function StepOptions() {
 
     return (
         <>
-            {/* Help button */}
-            <Dialog>
-                <DialogTrigger asChild>
-                    <button
-                        type="button"
-                        className="absolute top-4 right-4 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-secondary text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                        aria-label="Help"
-                    >
-                        ?
-                    </button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Listing your options</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-3 text-sm leading-relaxed">
-                        <p>
-                            Add all the realistic options you&apos;re considering.
-                            Don&apos;t worry about ranking them yet — that comes later.
-                        </p>
-                        <ul className="list-disc space-y-1 pl-5">
-                            <li>Include at least <strong>2 options</strong> to compare</li>
-                            <li>Keep names short &amp; recognisable</li>
-                            <li>You can add more options anytime with the <strong>Add option</strong> button</li>
-                        </ul>
-                        <p className="text-xs text-muted-foreground">
-                            Next you&apos;ll define the criteria that matter most.
-                        </p>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            <HelpDialog title="Listing your options">
+                <p>
+                    Add all the realistic options you&apos;re considering.
+                    Don&apos;t worry about ranking them yet — that comes later.
+                </p>
+                <ul className="list-disc space-y-1 pl-5">
+                    <li>Include at least <strong>2 options</strong> to compare</li>
+                    <li>Keep names short &amp; recognisable</li>
+                    <li>You can add more options anytime with the <strong>Add option</strong> button</li>
+                </ul>
+                <p className="text-xs text-muted-foreground">
+                    Next you&apos;ll define the criteria that matter most.
+                </p>
+            </HelpDialog>
 
             <CardHeader className="pb-2 pr-10">
                 <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary">
