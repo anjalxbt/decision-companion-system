@@ -153,7 +153,7 @@ export function StepResult() {
                     <label className="text-xs font-medium text-muted-foreground">
                         {explanation.isTie ? "It's a tie!" : `Why ${ranked[0]?.name}?`}
                     </label>
-                    <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
+                    <div className="space-y-2 text-sm leading-relaxed text-black">
                         <p>{explanation.summary}</p>
                         <p>{explanation.keyStrength}</p>
                         <p>{explanation.decisiveFactor}</p>

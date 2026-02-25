@@ -1,18 +1,181 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
+import {
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+} from "@/components/ui/chart";
 import { getHistory, deleteResult, type SavedResult } from "@/lib/history";
 import { useDecideStore } from "@/lib/store/decide-store";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
+const CHART_COLORS = [
+    "hsl(142, 76%, 36%)",
+    "hsl(217, 91%, 60%)",
+    "hsl(48, 96%, 53%)",
+    "hsl(280, 67%, 55%)",
+    "hsl(16, 90%, 55%)",
+    "hsl(190, 80%, 45%)",
+    "hsl(340, 75%, 55%)",
+    "hsl(100, 60%, 45%)",
+];
+
+// ── Expanded card detail component ──
+function ResultDetail({ result }: { result: SavedResult }) {
+    const chartData = useMemo(
+        () =>
+            result.criteria.map((criterion, ci) => {
+                const entry: Record<string, string | number> = { criterion };
+                result.options.forEach((opt, oi) => {
+                    entry[opt] = result.scores[ci]?.[oi] ?? 0;
+                });
+                return entry;
+            }),
+        [result]
+    );
+
+    const chartConfig = useMemo(() => {
+        const config: Record<string, { label: string; color: string }> = {};
+        result.options.forEach((opt, i) => {
+            config[opt] = {
+                label: opt,
+                color: CHART_COLORS[i % CHART_COLORS.length],
+            };
+        });
+        return config;
+    }, [result.options]);
+
+    return (
+        <div className="flex flex-col gap-4 pt-3">
+            {/* ── Full Leaderboard ── */}
+            <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-muted-foreground">
+                    Leaderboard
+                </label>
+                {result.ranked.map((r, i) => {
+                    const isWinner = r.rank === 1;
+                    return (
+                        <div
+                            key={i}
+                            className={`flex items-center gap-3 border px-3 py-2 text-sm transition-colors ${isWinner
+                                ? "border-primary/30 bg-primary/5"
+                                : "border-border/50 bg-muted/30"
+                                }`}
+                        >
+                            <span className="text-base">
+                                {r.rank <= 3 ? MEDALS[r.rank - 1] : `#${r.rank}`}
+                            </span>
+                            <span
+                                className={`flex-1 truncate font-medium ${isWinner
+                                    ? "text-foreground"
+                                    : "text-muted-foreground"
+                                    }`}
+                            >
+                                {r.name}
+                            </span>
+                            <span
+                                className={`tabular-nums font-bold ${isWinner
+                                    ? "text-primary"
+                                    : "text-muted-foreground"
+                                    }`}
+                            >
+                                {r.score}/100
+                            </span>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div className="h-px w-full bg-border/50" />
+
+            {/* ── Explanation ── */}
+            <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-muted-foreground">
+                    {result.explanation.isTie
+                        ? "It's a tie!"
+                        : `Why ${result.ranked[0]?.name}?`}
+                </label>
+                <div className="space-y-1.5 text-xs leading-relaxed text-black">
+                    <p>{result.explanation.summary}</p>
+                    <p>{result.explanation.keyStrength}</p>
+                    <p>{result.explanation.decisiveFactor}</p>
+                    {result.explanation.tradeOff && (
+                        <p className="text-amber-500">
+                            {result.explanation.tradeOff}
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            <div className="h-px w-full bg-border/50" />
+
+            {/* ── Chart ── */}
+            <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-muted-foreground">
+                    Scores by Criteria
+                </label>
+                <ChartContainer
+                    config={chartConfig}
+                    className="h-[180px] w-full"
+                >
+                    <BarChart
+                        data={chartData}
+                        margin={{ top: 8, right: 8, bottom: 16, left: -16 }}
+                    >
+                        <CartesianGrid
+                            vertical={false}
+                            strokeDasharray="3 3"
+                        />
+                        <XAxis
+                            dataKey="criterion"
+                            tickLine={false}
+                            axisLine={false}
+                            tick={{ fontSize: 9 }}
+                            interval={0}
+                            angle={-35}
+                            textAnchor="end"
+                            height={45}
+                            padding={{ left: 10, right: 10 }}
+                        />
+                        <YAxis
+                            type="number"
+                            domain={[0, 10]}
+                            tickLine={false}
+                            axisLine={false}
+                            tick={{ fontSize: 10 }}
+                        />
+                        <ChartTooltip
+                            content={<ChartTooltipContent />}
+                        />
+                        {result.options.map((opt, i) => (
+                            <Bar
+                                key={opt}
+                                dataKey={opt}
+                                radius={0}
+                                fill={
+                                    CHART_COLORS[i % CHART_COLORS.length]
+                                }
+                            />
+                        ))}
+                    </BarChart>
+                </ChartContainer>
+            </div>
+        </div>
+    );
+}
+
+// ── Main Profile Page ──
 export default function ProfilePage() {
     const [history, setHistory] = useState<SavedResult[]>([]);
     const [mounted, setMounted] = useState(false);
+    const [expandedId, setExpandedId] = useState<string | null>(null);
     const router = useRouter();
     const reset = useDecideStore((s) => s.reset);
 
@@ -24,6 +187,11 @@ export default function ProfilePage() {
     const handleDelete = (id: string) => {
         deleteResult(id);
         setHistory(getHistory());
+        if (expandedId === id) setExpandedId(null);
+    };
+
+    const toggleExpand = (id: string) => {
+        setExpandedId((prev) => (prev === id ? null : id));
     };
 
     if (!mounted) {
@@ -83,58 +251,82 @@ export default function ProfilePage() {
                         </Card>
                     ) : (
                         <div className="flex flex-col gap-4">
-                            {history.map((result) => (
-                                <Card
-                                    key={result.id}
-                                    className="border-border/50 bg-card/80 backdrop-blur-sm"
-                                >
-                                    <CardHeader className="pb-2">
-                                        <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
-                                            {new Date(result.savedAt).toLocaleDateString("en-US", {
-                                                month: "short",
-                                                day: "numeric",
-                                                year: "numeric",
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                            })}
-                                        </p>
-                                        <CardTitle className="text-base font-bold">
-                                            {result.question}
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="flex flex-col gap-3 pt-0">
-                                        {/* Top 3 rankings */}
-                                        <div className="flex flex-col gap-1.5">
-                                            {result.ranked.slice(0, 3).map((r, i) => (
-                                                <div
-                                                    key={i}
-                                                    className={`flex items-center gap-2 text-sm ${r.rank === 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
+                            {history.map((result) => {
+                                const isExpanded = expandedId === result.id;
+                                return (
+                                    <Card
+                                        key={result.id}
+                                        className="border-border/50 bg-card/80 backdrop-blur-sm transition-all"
+                                    >
+                                        <CardHeader
+                                            className="cursor-pointer pb-2"
+                                            onClick={() => toggleExpand(result.id)}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+                                                    {new Date(result.savedAt).toLocaleDateString("en-US", {
+                                                        month: "short",
+                                                        day: "numeric",
+                                                        year: "numeric",
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                    })}
+                                                </p>
+                                                <svg
+                                                    className={`h-4 w-4 text-black transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    strokeWidth={2}
                                                 >
-                                                    <span>{r.rank <= 3 ? MEDALS[r.rank - 1] : `#${r.rank}`}</span>
-                                                    <span className="flex-1 truncate">{r.name}</span>
-                                                    <span className="tabular-nums font-medium">{r.score}/100</span>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                </svg>
+                                            </div>
+                                            <CardTitle className="text-base font-bold">
+                                                {result.question}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="flex flex-col gap-3 pt-0">
+                                            {/* Collapsed: top 3 + summary */}
+                                            <div className="flex flex-col gap-1.5">
+                                                {result.ranked.slice(0, 2).map((r, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className={`flex items-center gap-2 text-sm ${r.rank === 1 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
+                                                    >
+                                                        <span>{r.rank <= 3 ? MEDALS[r.rank - 1] : `#${r.rank}`}</span>
+                                                        <span className="flex-1 truncate">{r.name}</span>
+                                                        <span className="tabular-nums font-medium">{r.score}/100</span>
+                                                    </div>
+                                                ))}
+                                            </div>
 
-                                        {/* Summary line */}
-                                        <p className="text-xs leading-relaxed text-muted-foreground">
-                                            {result.explanation.summary}
-                                        </p>
+                                            <p className="text-xs leading-relaxed text-muted-foreground">
+                                                {result.explanation.summary}
+                                            </p>
 
-                                        {/* Delete */}
-                                        <div className="flex justify-end">
-                                            <button
-                                                type="button"
-                                                onClick={() => handleDelete(result.id)}
-                                                className="cursor-pointer text-xs text-muted-foreground/50 transition-colors hover:text-destructive"
-                                            >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ))}
+                                            {/* Expanded: full details */}
+                                            {isExpanded && (
+                                                <ResultDetail result={result} />
+                                            )}
+
+                                            {/* Delete */}
+                                            <div className="flex justify-end">
+                                                <button
+                                                    type="button"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleDelete(result.id);
+                                                    }}
+                                                    className="cursor-pointer text-xs text-red-500 transition-colors hover:text-destructive"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
                         </div>
                     )}
                 </div>
