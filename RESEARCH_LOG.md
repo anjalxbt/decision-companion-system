@@ -55,3 +55,7 @@
 ---
 # Day 9 [Feb 25]:
 - "i am using localstorage for my app. what is the max storage capacity of local storage"
+
+---
+# Day 10 [Feb 26]:
+- "the user can't distribute perfectly with 3 equal criteria. what do i do either by using parseFloat() and allow decimals or by adding a "distribute equally" button. which is the best way to fix this situation"

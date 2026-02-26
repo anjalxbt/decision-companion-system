@@ -250,3 +250,12 @@ But the concern was, I think they process the data on their servers. So I decide
 - Adding more than 8 options or criteria makes the app unusable and the chart unreadable. Therefore, I fixed the maximum number of options and criteria to 8.
 - Also found out that I can add the same options and criteria repeatedly. So I implemented a duplicate finder in the store to prevent that.
 - Because the data is stored in local storage, after researching I found that the maximum capacity is around 5MB–10MB. So I added a storage full indicator, so the user can delete unwanted results and then come back and save new ones.
+
+***
+# Day 10 [Feb 26]:
+## [morning]
+### edge case
+- This edge case came in an unexpected way. I got a split of 33.33 rupees on Google Pay, and then I thought, what if there are 3 criteria and I want to split them equally?
+- The thing is, I am taking integers as input. So I can’t split equally because 33 + 33 + 33 = 99. One percent is remaining.
+- Then I researched about this. I found that allowing decimals would make the UI messy, and adding decimals gives almost nothing in accuracy.
+- Therefore, I implemented a “Distribute Equally” button. The first criterion gets the extra 1%.
