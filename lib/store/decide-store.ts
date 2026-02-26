@@ -39,6 +39,7 @@ interface DecideState {
     updateCriterion: (index: number, value: string) => void;
     removeCriterion: (index: number) => void;
     setWeight: (index: number, value: number) => void;
+    distributeWeightsEqually: () => void;
     setCriteriaSubStep: (sub: 0 | 1) => void;
     initScores: () => void;
     setScore: (criterionIdx: number, optionIdx: number, value: number) => void;
@@ -150,6 +151,22 @@ export const useDecideStore = create<DecideState>()(
                 set((state) => ({
                     weights: state.weights.map((w, i) => (i === index ? Math.max(0, Math.min(100, value)) : w)),
                 })),
+
+            distributeWeightsEqually: () =>
+                set((state) => {
+                    const filled = state.criteria.filter((c) => c.trim().length > 0);
+                    const count = filled.length;
+                    if (count === 0) return state;
+                    const base = Math.floor(100 / count);
+                    const remainder = 100 % count;
+                    return {
+                        weights: state.criteria.map((c, i) => {
+                            if (!c.trim()) return 0;
+                            const filledIdx = filled.indexOf(c);
+                            return base + (filledIdx < remainder ? 1 : 0);
+                        }),
+                    };
+                }),
 
             setCriteriaSubStep: (sub) => set({ criteriaSubStep: sub }),
 

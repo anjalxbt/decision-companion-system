@@ -31,6 +31,7 @@ export function StepCriteria() {
         canAdvanceCriteriaNames,
         canAdvanceCriteriaWeights,
         hasDuplicateCriteria,
+        distributeWeightsEqually,
     } = useDecideStore();
 
 
@@ -213,9 +214,19 @@ export function StepCriteria() {
 
             <CardContent className="flex flex-col gap-6 pt-2">
                 <div className="-m-1 flex max-h-[240px] flex-col gap-3 overflow-y-auto p-1">
-                    <label className="text-xs font-medium text-muted-foreground">
-                        Priority weights
-                    </label>
+                    <div className="flex items-center justify-between">
+                        <label className="text-xs font-medium text-muted-foreground">
+                            Priority weights
+                        </label>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-7 cursor-pointer gap-1 text-xs text-muted-foreground hover:text-foreground"
+                            onClick={() => { playClick(); distributeWeightsEqually(); }}
+                        >
+                            Split equally
+                        </Button>
+                    </div>
 
                     {criteria.map((c, i) => {
                         if (!c.trim()) return null;
