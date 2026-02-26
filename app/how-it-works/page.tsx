@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+    title: "How It Works",
+    description:
+        "Learn how Decision Companion uses a 5-step weighted scoring model to turn subjective choices into objective comparisons.",
+};
 
 const STEPS = [
     {

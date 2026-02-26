@@ -10,9 +10,25 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Decision Companion",
+  title: {
+    default: "Decision Companion",
+    template: "%s | Decision Companion",
+  },
   description:
-    "Make confident decisions using the weighted decision model.",
+    "Make confident decisions using the weighted decision model. Weigh your options, trust the outcome.",
+  openGraph: {
+    title: "Decision Companion",
+    description: "Weigh your options. Trust the outcome. Stop overthinking.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Decision Companion",
+  },
+  twitter: {
+    card: "summary",
+    title: "Decision Companion",
+    description: "Weigh your options. Trust the outcome. Stop overthinking.",
+  },
+  metadataBase: new URL("https://decision-companion.vercel.app"),
 };
 
 export default function RootLayout({
