@@ -263,3 +263,8 @@ But the concern was, I think they process the data on their servers. So I decide
 ### development updates
 - implemented the how it works page
 - improved the seo optimization
+
+## [night]
+- Implemented Docker for a better setup.
+- The app is almost complete and all the system must-haves are implemented.
+- Now I need to write the README and set up things for submission.
