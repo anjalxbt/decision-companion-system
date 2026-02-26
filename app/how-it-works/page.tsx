@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
+"use client"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { playClick } from "@/lib/sound";
 
-export const metadata: Metadata = {
-    title: "How It Works",
-    description:
-        "Learn how Decision Companion uses a 5-step weighted scoring model to turn subjective choices into objective comparisons.",
-};
+
 
 const STEPS = [
     {
@@ -219,8 +217,9 @@ export default function HowItWorksPage() {
                     <p className="text-sm text-muted-foreground">
                         Ready to make a decision?
                     </p>
-                    <Link href="/decide">
+                    <Link href="/decide" onClick={playClick}>
                         <Button
+
                             size="lg"
                             className="min-h-12 cursor-pointer px-8 text-base font-semibold shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-[0.98]"
                         >

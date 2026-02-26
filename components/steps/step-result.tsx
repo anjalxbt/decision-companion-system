@@ -18,6 +18,7 @@ import { useDecideStore } from "@/lib/store/decide-store";
 import { calculateScores, generateExplanation } from "@/lib/calculate";
 import { saveResult } from "@/lib/history";
 import { MEDALS, CHART_COLORS } from "@/lib/constants";
+import { playClick } from "@/lib/sound";
 
 
 
@@ -94,6 +95,7 @@ export function StepResult() {
     const handleStartOver = () => {
         reset();
         router.push("/decide");
+        playClick();
     };
 
     return (

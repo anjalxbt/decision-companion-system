@@ -11,6 +11,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { playClick } from "@/lib/sound";
 import { useDecideStore } from "@/lib/store/decide-store";
 
 export function StartOver() {
@@ -23,6 +24,7 @@ export function StartOver() {
         <AlertDialog>
             <AlertDialogTrigger asChild>
                 <button
+                    onClick={playClick}
                     type="button"
                     className="fixed top-4 right-[7.5rem] z-50 flex cursor-pointer items-center gap-1.5 bg-red-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-red-600/80"
                 >
@@ -41,9 +43,9 @@ export function StartOver() {
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+                    <AlertDialogCancel className="cursor-pointer" onClick={playClick}>Cancel</AlertDialogCancel>
                     <AlertDialogAction
-                        onClick={reset}
+                        onClick={() => { reset(); playClick(); }}
                         className="cursor-pointer bg-red-600 text-white hover:bg-red-600/90"
                     >
                         Yes, start over

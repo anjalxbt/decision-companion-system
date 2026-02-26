@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { playClick } from "@/lib/sound";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
@@ -9,13 +10,14 @@ export default function Home() {
   const router = useRouter();
 
   const handleDecideClick = () => {
-    new Audio("/typewriter-soft-click.wav").play();
+    playClick();
     setTimeout(() => router.push("/decide"), 10);
   };
 
   return (
     <div className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-background px-6">
       <Link
+        onClick={playClick}
         href="/how-it-works"
         className="fixed top-4 right-[7.5rem] z-50 flex items-center gap-1.5 bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
       >

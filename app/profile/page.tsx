@@ -15,6 +15,7 @@ import { getHistory, deleteResult, type SavedResult } from "@/lib/history";
 import { useDecideStore } from "@/lib/store/decide-store";
 import { MEDALS, CHART_COLORS } from "@/lib/constants";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { playClick } from "@/lib/sound";
 
 
 // ── Expanded card detail component ──
@@ -193,6 +194,7 @@ export default function ProfilePage() {
 
             {/* Back button */}
             <Link
+                onClick={playClick}
                 href="/decide"
                 className="fixed top-4 left-4 z-50 flex items-center gap-1.5 bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
             >
@@ -205,7 +207,7 @@ export default function ProfilePage() {
             {/* New decision button */}
             <button
                 type="button"
-                onClick={() => { reset(); router.push("/decide"); }}
+                onClick={() => { reset(); playClick(); router.push("/decide"); }}
                 className="fixed top-4 right-4 z-50 flex cursor-pointer items-center gap-1.5 bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/80"
             >
                 <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
