@@ -259,3 +259,7 @@ But the concern was, I think they process the data on their servers. So I decide
 - The thing is, I am taking integers as input. So I can’t split equally because 33 + 33 + 33 = 99. One percent is remaining.
 - Then I researched about this. I found that allowing decimals would make the UI messy, and adding decimals gives almost nothing in accuracy.
 - Therefore, I implemented a “Distribute Equally” button. The first criterion gets the extra 1%.
+
+### development updates
+- implemented the how it works page
+- improved the seo optimization
