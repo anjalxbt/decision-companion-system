@@ -33,14 +33,14 @@ export default function DecidePage() {
             {!showResult && <StartOver />}
 
             {/* Ambient blobs */}
-            <div
+            {/* <div
                 aria-hidden="true"
                 className="animate-float pointer-events-none absolute -top-20 -right-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl sm:h-96 sm:w-96"
             />
             <div
                 aria-hidden="true"
                 className="animate-float-delayed pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-destructive/8 blur-3xl sm:h-80 sm:w-80"
-            />
+            /> */}
 
             {!showResult && <StepTracker />}
 

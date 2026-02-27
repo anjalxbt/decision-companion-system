@@ -14,7 +14,7 @@ export default function Home() {
       >
         How it works
       </Link>
-      <div
+      {/* <div
         aria-hidden="true"
         className="absolute inset-0 z-0 opacity-10"
         style={{ backgroundImage: "url('/bg_image.png')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
@@ -31,7 +31,7 @@ export default function Home() {
       <div
         aria-hidden="true"
         className="animate-float-slow absolute top-1/3 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-primary/5 blur-2xl sm:h-64 sm:w-64"
-      />
+      /> */}
 
 
       <main className="relative z-10 flex max-w-xl flex-col items-center gap-6 text-center sm:gap-8">
