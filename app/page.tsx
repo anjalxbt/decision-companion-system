@@ -58,7 +58,7 @@ export default function Home() {
       </main>
 
 
-      <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-muted-foreground/60 sm:text-sm">
+      <p className="text-center absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-muted-foreground/60 sm:text-sm">
         Powered by weighted decision model
       </p>
     </div>

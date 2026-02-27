@@ -266,5 +266,9 @@ But the concern was, I think they process the data on their servers. So I decide
 
 ## [night]
 - Implemented Docker for a better setup.
-- The app is almost complete and all the system must-haves are implemented.
+- The app is almost complete.
 - Now I need to write the README and set up things for submission.
+***
+# Day 11 [Feb 27]:
+- deployed the project on vercel
+- checked web vitals in https://pagespeed.web.dev/ and found some contrast issues everything is fixed now
