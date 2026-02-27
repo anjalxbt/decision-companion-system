@@ -67,10 +67,10 @@ export function StepDecide() {
                         {/* <TableCaption>Decision Score Matrix</TableCaption> */}
                         <TableHeader className="sticky top-0 z-10 bg-muted-foreground">
                             <TableRow>
-                                <TableHead className="font-semibold">Criteria</TableHead>
-                                <TableHead className="text-center font-semibold">Weight</TableHead>
+                                <TableHead className="font-semibold text-white">Criteria</TableHead>
+                                <TableHead className="text-center font-semibold text-white">Weight</TableHead>
                                 {options.map((opt, i) => (
-                                    <TableHead key={i} className="text-center font-semibold">
+                                    <TableHead key={i} className="text-center font-semibold text-white">
                                         {opt}
                                     </TableHead>
                                 ))}
