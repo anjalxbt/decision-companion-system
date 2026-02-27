@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: "*",
             allow: "/",
         },
-        sitemap: "https://decision-companion.vercel.app/sitemap.xml",
+        sitemap: "https://decision-companion-five.vercel.app/sitemap.xml",
     };
 }
