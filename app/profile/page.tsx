@@ -231,7 +231,7 @@ export default function ProfilePage() {
                                     No saved decisions yet.
                                 </p>
                                 <Link href="/decide">
-                                    <Button size="sm" className="mt-2 cursor-pointer">
+                                    <Button size="sm" className="mt-2 cursor-pointer" onClick={playClick}>
                                         Make a decision
                                     </Button>
                                 </Link>

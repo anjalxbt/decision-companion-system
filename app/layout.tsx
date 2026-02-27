@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Decision Companion",
     description: "Weigh your options. Trust the outcome. Stop overthinking.",
   },
-  metadataBase: new URL("https://decision-companion.vercel.app"),
+  metadataBase: new URL("https://decision-companion-five.vercel.app"),
 };
 
 export default function RootLayout({
