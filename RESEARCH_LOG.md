@@ -59,3 +59,6 @@
 ---
 # Day 10 [Feb 26]:
 - "the user can't distribute perfectly with 3 equal criteria. what do i do either by using parseFloat() and allow decimals or by adding a "distribute equally" button. which is the best way to fix this situation"
+---
+# Day 11 [Feb 27]:
+- web vitals: https://pagespeed.web.dev/analysis/https-decision-companion-five-vercel-app/nlw028dwc0?form_factor=desktop
