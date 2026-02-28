@@ -69,9 +69,12 @@ Make sure you have Node.js and a package manager (`npm`, `yarn`, `pnpm`, or `bun
 2. The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ## What I would improve with more time
+* **Comprehensive Testing:** Add more automated tests to the project (unit and integration) to ensure stability and prevent regressions as the application scales.
 * **Auth & Cloud Storage:** Introduce optional authentication and a cloud database for users who explicitly want to sync and store their decision data across multiple devices.
 * **Advanced Visualizations:** Introduce alternative chart types (e.g., Radar/Spider charts) to compare overlap and weaknesses of varying options more effectively.
 * **Data Exportation:** Allow users to export their decision matrix and explanations to a PDF or CSV format for sharing or record-keeping.
 * **Custom Configurable Tie-Breakers:** Give advanced users the option to choose their preferred tie-breaker strategy (e.g., automatically win based on the heaviest weighted criterion).
 * **"What If" Scenarios:** Enhance the dynamic explanation generator to provide contextual hints, such as "If you valued your Budget 10% more, Option B would have won."
 * **Internationalization:** Add multi-language support to push the original goal of making it accessible to absolutely anyone.
+* **Shareable Decision Links:** Generate unique, read-only links capturing the final mathematical breakdown, so users can easily share their decision matrix with partners or colleagues.
+* **Progressive Web App (PWA):** Compile the application into an installable PWA, allowing users to install it on their phones and use it completely offline like a native app.
