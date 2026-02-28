@@ -107,3 +107,4 @@
 - **Lighthouse Web Vitals:** https://pagespeed.web.dev/analysis/https-decision-companion-five-vercel-app/nlw028dwc0?form_factor=desktop
 ---
 - Please read [BUILD_PROCESS.md](./BUILD_PROCESS.md) thoroughly. It contains everything.
+- Please review [DESIGN.md](./DESIGN.md) for the system architecture.

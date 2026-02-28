@@ -272,3 +272,6 @@ But the concern was, I think they process the data on their servers. So I decide
 # Day 11 [Feb 27]:
 - deployed the project on vercel
 - checked web vitals in https://pagespeed.web.dev/ and found some contrast issues everything is fixed now
+
+---
+*Note: I used ChatGPT to correct the grammar of all my raw build process log. The full raw conversation link is here: https://chatgpt.com/share/69a297d3-05b4-800e-ba9c-d830ff0bcbd7*

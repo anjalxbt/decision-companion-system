@@ -2,6 +2,11 @@
 
 **Live Demo:** [https://decision-companion-five.vercel.app/](https://decision-companion-five.vercel.app/)
 
+## Key Documentation 📚
+- **[RESEARCH_LOG.md](./RESEARCH_LOG.md)** - Full AI prompts, search queries, and decision outcomes.
+- **[BUILD_PROCESS.md](./BUILD_PROCESS.md)** - Step-by-step chronology of the app's development.
+- **[DESIGN.md](./DESIGN.md)** - System architecture diagram.
+
 ## My understanding of the problem
 Making decisions is easy when there is only one criterion to evaluate (e.g., choosing a laptop based *only* on RAM). The complexity arises when we must weigh multiple different criteria (like Budget, Performance, and Portability) across several comparable options. A true decision companion should be so intuitive and accessible that absolutely anyone can use it from a phone or laptop without any hurdles.
 
@@ -24,6 +29,11 @@ Making decisions is easy when there is only one criterion to evaluate (e.g., cho
 * **Integer Scoring over Decimals:** Decided to use whole integers (1-10 for scores, percentages for weights) rather than floating-point numbers. Decimals clutter the UI and provide negligible accuracy benefits for highly subjective metrics.
 * **Temporary vs. Saved States:** Trade-off between unlimited storage in a cloud DB and strict 5MB-10MB local storage limits. To mitigate this, users manually choose to "Save Result", and a built-in storage full indicator helps manage capacity gracefully.
 * **Tactile Feedback & Visual Breakdown:** Implemented a typewriter sound effect (`playClick()`) on action buttons during the decision flow to add a tactile, engaging feel that mimics physical processing. Additionally, integrated Recharts (`<BarChart />`) on the results page to render grouped bar charts, allowing users to visually break down exactly where an option gained or lost points across criteria, rather than relying on plain text.
+* **Dynamic Explanation Generator:** Built a dynamic text generator (`lib/calculate.ts`) that synthesizes numerical results into human-readable insights instead of forcing the user to calculate meaning.
+  * *Winner summary:* Top-ranked option + score. (e.g. *"MacBook Pro scored 78/100, making it your strongest choice."*)
+  * *Key strength:* Criterion where winner has highest weighted contribution. (e.g. *"It excels in Performance (8/10), which carries your heaviest weight at 50%."*)
+  * *Decisive factor:* Criterion with biggest score gap vs runner-up × weight. (e.g. *"The deciding factor was Battery Life — it scored 9 vs 5, on a criterion weighted at 25%."*)
+  * *Trade-off (honesty):* Winner's lowest-scoring criterion. (e.g. *"However, it scored lowest in Price (3/10)."*)
 
 ## Edge cases considered
 * **Zero Weight / Empty Criteria:** The UI prevents users from proceeding if a criterion is left empty or has a 0% weight, as it would mathematically have no impact on the final decision.
@@ -32,7 +42,6 @@ Making decisions is easy when there is only one criterion to evaluate (e.g., cho
 * **UI/UX Limits:** Hard-capped the maximum number of criteria and options to 8 each, preventing the UI and charts from becoming unreadable or breaking on mobile devices.
 * **Duplicate Entries:** Handled duplicate option/criteria names by implementing a duplicate finder in the store, as duplicate keys break the Recharts rendering logic.
 * **LocalStorage Quota Limits:** Wrapped storage saves in a try-catch block to handle the 5-10MB quota limits, providing a visual "Storage Full" feedback warning to the user to clean up old results.
-
 ## How to run the project
 
 ### Prerequisites

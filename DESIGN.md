@@ -1,1 +1,1 @@
-![System architecture](architecuture.png)
+<img src="architecuture.png" alt="System architecture" width="700">
